@@ -1,0 +1,92 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Simon Zhu — Projects</title>
+  <style>
+    :root {
+      --bg: #fdfdfc; --fg: #1a1a19; --muted: #6b6b68;
+      --accent: #2f5fd8; --line: #e4e4e1;
+    }
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #16161a; --fg: #eceae6; --muted: #9a9a95;
+        --accent: #8fb0ff; --line: #2c2c31;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0 auto; padding: 4rem 1.5rem 6rem; max-width: 42rem;
+      background: var(--bg); color: var(--fg);
+      font: 16px/1.65 system-ui, -apple-system, "Segoe UI", sans-serif;
+    }
+    h1 { font-size: 1.6rem; margin: 0 0 .3rem; letter-spacing: -.02em; }
+    h2 {
+      font-size: .78rem; text-transform: uppercase; letter-spacing: .09em;
+      color: var(--muted); margin: 3.5rem 0 1.25rem; font-weight: 600;
+    }
+    h3 { font-size: 1.05rem; margin: 0 0 .35rem; }
+    a { color: var(--accent); text-decoration-thickness: 1px; text-underline-offset: 2px; }
+    .tagline { color: var(--muted); margin: 0 0 1.75rem; }
+    .project { padding: 1.5rem 0; border-top: 1px solid var(--line); }
+    .project p { margin: .5rem 0; }
+    .hard { color: var(--muted); font-size: .94rem; }
+    .meta { font-size: .85rem; color: var(--muted); margin-top: .6rem; }
+    .meta a { margin-right: 1rem; }
+    footer {
+      margin-top: 4rem; padding-top: 1.5rem; border-top: 1px solid var(--line);
+      font-size: .9rem; color: var(--muted);
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Simon Zhu</h1>
+  <p class="tagline">
+    Incoming CS @ Waterloo. I build embedded systems and things that move.
+    Looking for a Winter 2027 co-op.
+  </p>
+  <p>
+    <a href="mailto:simonzhu.info@gmail.com">Email</a> ·
+    <a href="https://github.com/simonnnz">GitHub</a> ·
+    <a href="/resume.pdf">Resume</a>
+  </p>
+
+  <h2>Projects</h2>
+
+  <article class="project">
+    <h3>Quadruped Robot Dog</h3>
+    <p>A twelve-servo walking robot running on an ESP32, with a gait
+       controller and inverse kinematics solved on-device.</p>
+    <p class="hard">The obvious servo library blocked for a full 20 ms PWM frame
+       per write — twelve sequential writes cost 240 ms and the gait visibly
+       stuttered. I dropped to the ESP32's LEDC peripheral and drove the
+       channels directly, which took the update loop under 2 ms.</p>
+    <p class="meta">
+      <a href="#">Demo video</a><a href="#">Source</a>
+      <span>C++ · ESP32 · FreeRTOS</span>
+    </p>
+  </article>
+
+  <article class="project">
+    <h3>Second Project</h3>
+    <p>One sentence on what it does.</p>
+    <p class="hard">The interesting problem, and how you solved it.</p>
+    <p class="meta"><a href="#">Source</a><span>Stack · Here</span></p>
+  </article>
+
+  <article class="project">
+    <h3>Third Project</h3>
+    <p>One sentence on what it does.</p>
+    <p class="hard">The interesting problem, and how you solved it.</p>
+    <p class="meta"><a href="#">Source</a><span>Stack · Here</span></p>
+  </article>
+
+  <footer>
+    Built with HTML and CSS.
+    <a href="https://github.com/simonnnz/simonnnz.github.io">Source</a>.
+  </footer>
+
+</body>
+</html>
