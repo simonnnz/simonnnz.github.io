@@ -289,6 +289,30 @@
    "clip_obs": 10.0,
    "eps": 1e-08,
    "forward_check": 8.401236678556856e-08
+  },
+  "demo": {
+   "label": "Demo mode",
+   "file": "policy-demo.bin",
+   "run": "ppo_demo",
+   "model": "final.zip",
+   "obs_dim": 39,
+   "layers": [
+    [
+     128,
+     39
+    ],
+    [
+     128,
+     128
+    ],
+    [
+     6,
+     128
+    ]
+   ],
+   "clip_obs": 10.0,
+   "eps": 1e-08,
+   "forward_check": 6.398489678371977e-08
   }
  },
  "clips": [
@@ -325,6 +349,41 @@
     "n": 256,
     "half": 4.0,
     "amp": 0.03
+   }
+  },
+  {
+   "name": "sprint",
+   "set": "demo",
+   "file": "demo-sprint.bin",
+   "title": "Full send",
+   "frames": 1200,
+   "fell": null,
+   "cols": 136,
+   "terrain": null
+  },
+  {
+   "name": "brawl",
+   "set": "demo",
+   "file": "demo-brawl.bin",
+   "title": "Big shoves",
+   "frames": 1000,
+   "fell": null,
+   "cols": 136,
+   "terrain": null
+  },
+  {
+   "name": "steps",
+   "set": "demo",
+   "file": "demo-steps.bin",
+   "title": "Steps and bumps",
+   "frames": 1200,
+   "fell": null,
+   "cols": 136,
+   "terrain": {
+    "file": "demo-ground-steps.bin",
+    "n": 256,
+    "half": 4.0,
+    "amp": 0.04
    }
   }
  ]

@@ -1317,7 +1317,9 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                  69 hours of simulated driving.<!--/@--></p>
               <p><!--@rl.demo-->Below is the trained policy driving in the MuJoCo simulator. The network
                  beside it is the real one: its 22,406 weights are running in your browser, on
-                 the same sensor readings the robot had, deciding what each motor does next.<!--/@--></p>
+                 the same sensor readings the robot had, deciding what each motor does next.
+                 The ⚡ clips are a second policy, retrained with the hardware limits taken off —
+                 the last page explains what that means.<!--/@--></p>
 
               <div class="rl-demo" id="rlDemo">
                 <div class="rl-stage" id="rlStage">
@@ -1510,7 +1512,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 <li><b>170 mm</b><span>track width</span></li>
               </ul>
 
-              <div class="learned"><b>Where it stands</b><!--@rl.status-->
+              <div class="learned" id="rl-status"><b>Where it stands</b><!--@rl.status-->
                 It isn't finished, and the demo doesn't hide that. At nominal conditions it
                 balances, drives, spins on the spot and recovers from shoves. Turn rate tracks
                 within a few percent, but forward speed undershoots, reaching about two-thirds of
@@ -1518,6 +1520,55 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 ride-height commands. Under full randomisation it still fails about half of its
                 20-second episodes, and it can't yet reliably drive off an 18&nbsp;mm step. Next
                 comes validation, then the real robot.<!--/@--></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="frame">
+          <div class="pcols">
+            <div><span class="year">Demo mode</span></div>
+            <div>
+              <h3>The same robot, with the limits taken off</h3>
+              <p class="lede"><!--@rl.demo-lede-->Everything above is bound by what my hardware can actually do. This
+                 isn't. I took the trained policy and kept training it in a simulator with the
+                 physical limits removed, to see what the method does when the motors stop being
+                 the constraint. It is the ⚡ clips in the player, and it will never run on the
+                 real robot.<!--/@--></p>
+
+              <div class="rl-io">
+                <div>
+                  <p class="g-group">What I took off</p>
+                  <ul class="rl-list rl-w">
+                    <li>Motor supply, 9.4 V<em>16.8 V</em></li>
+                    <li>Current limit, 1 A<em>3 A</em></li>
+                    <li>Wheel torque, 0.05 N·m<em>0.15</em></li>
+                    <li>Winding heat model<em>off</em></li>
+                    <li>Every randomised property<em>off</em></li>
+                  </ul>
+                </div>
+                <div>
+                  <p class="g-group">What I asked for instead</p>
+                  <ul class="rl-list rl-w">
+                    <li>Speed, ±1.2 m/s<em>±2.8</em></li>
+                    <li>Turn rate, ±2.5 rad/s<em>±6.0</em></li>
+                    <li>Shoves, 0.7 m/s<em>1.2</em></li>
+                    <li>Bumps and steps, 12 / 18 mm<em>16 / 24</em></li>
+                  </ul>
+                </div>
+              </div>
+
+              <p><!--@rl.demo-result-->Eight million more steps, three and a half hours. It turns at
+                 5.8 rad/s of a commanded 6.0, takes 1 m/s shoves standing up, and drives over the
+                 24&nbsp;mm step edges the honest policy fell off every single time. Survival went
+                 from about half of its episodes to 81%.<!--/@--></p>
+
+              <div class="learned"><b>What it doesn't fix</b><!--@rl.demo-limits-->
+                Torque was never the whole problem. It still undershoots forward speed, reaching
+                1.24 m/s of a commanded 1.8, and it still ignores ride-height commands entirely —
+                both of which the honest policy also does, so neither is a power limit. A shove
+                landing while it drives and turns at the same time still puts it on its side, on
+                five of six starts. The interesting part of the demo is which failures survived
+                having their cause removed.<!--/@--></div>
             </div>
           </div>
         </div>
