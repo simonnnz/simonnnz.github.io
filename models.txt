@@ -29,8 +29,8 @@ chess-mk1   | %USERPROFILE%\Downloads\MK1 Automatic Chess Board v24.stl   | 26 |
 chess-mk2   | %USERPROFILE%\Downloads\MK2 Automatic Chess Board v16.stl   | 26 | 0.004
 chess-mk3   | %USERPROFILE%\Downloads\Automatic ChessBoard MK3 v29.stl    | 26 | 0.004
 
-dog-topleg  | %USERPROFILE%\Downloads\Top Leg.stl                         | 22 | 0.000
-dog-hipplate| %USERPROFILE%\Downloads\Hip Plate.stl                       | 22 | 0.000
+# The wheel-leg biped has no CAD here: its wireframe is built from the MuJoCo
+# model by tools\biped_edges.py, which writes edges\biped.bin.
 
 # The MK3 flap is built separately because it needs splitting first.
 # See EDITING.md, "Re-splitting the chess board".

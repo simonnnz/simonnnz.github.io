@@ -105,6 +105,14 @@ mark { background: var(--tape); color: inherit; padding:.05em .2em; }
 .chip:hover, .chip:hover .n { color:var(--accent); }
 .chip:hover .arrow, .chip:focus-visible .arrow { transform:translate(3px,-3px); }
 
+/* unfinished projects still link through to what exists, and say so in text
+   rather than only by looking different */
+.flag-wip { display:inline-block; margin-top:.5rem; font-family:var(--mono);
+            font-size:.55rem; font-weight:600; letter-spacing:.16em; text-transform:uppercase;
+            color:var(--muted); border:1px dashed currentColor; border-radius:2px;
+            padding:.1rem .38rem; transition:color .18s ease; }
+.chip:hover .flag-wip, .chip:focus-visible .flag-wip { color:var(--accent); }
+
 /* the affordance: a rule that fills with accent on hover, so it reads as a control */
 .chip .bar { display:block; height:1.5px; background:var(--line); margin-top:.5rem;
              position:relative; overflow:hidden; }
@@ -131,7 +139,9 @@ mark { background: var(--tape); color: inherit; padding:.05em .2em; }
   .c1 { left:1%;  top:40%; transform:rotate(-2.5deg); }
   .c2 { right:2%; top:34%; transform:rotate(1.5deg); width:clamp(13rem,17vw,19rem); }
   .c3 { left:4%;  top:80%; transform:rotate(-1deg); }
-  .c4 { left:8%;  top:17%; transform:rotate(2deg); }
+  .c4 { left:11%; top:20%; transform:rotate(2deg); }
+  /* the biped is drawn tall; a smaller box keeps it clear of the chess board */
+  .c4 .mesh { width:clamp(11rem,17vw,20rem); height:clamp(8rem,12vw,14rem); }
   .c5 { right:6%; top:80%; transform:rotate(-1.5deg); }
   /* the two finished projects get the room: chess on the left, the robot on the right */
   .c1 .mesh, .c2 .mesh { width:clamp(17rem,28vw,34rem); height:clamp(12rem,18vw,21rem); }
@@ -784,16 +794,18 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
       <span class="bar"></span>
     </a>
     <a class="chip c4" href="#construction">
-      <span class="mesh" data-model="edges/dog-topleg.bin" data-spin="-1.05" data-alpha=".95"></span>
+      <span class="mesh" data-model="edges/biped.bin" data-spin="-.45" data-pitch=".30" data-alpha=".95"></span>
       <span class="n">04</span>
-      <span class="label">Quadruped Robot Dog <span class="arrow">↗</span></span>
+      <span class="label">Wheeled Biped <span class="arrow">↗</span></span>
       <span class="bar"></span>
+      <span class="flag-wip">In progress</span>
     </a>
     <a class="chip c5" href="#construction">
       <span class="mesh" data-empty></span>
       <span class="n">05</span>
-      <span class="label">RC Airframes <span class="arrow">↗</span></span>
+      <span class="label">Flying Probe Tester <span class="arrow">↗</span></span>
       <span class="bar"></span>
+      <span class="flag-wip">In progress</span>
     </a>
   </div>
 
@@ -1598,9 +1610,8 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
         <p>More projects are on the way. I'd rather put them up once they're finished than show you
            half a page.</p>
         <ul class="uc-list">
-          <li>Quadruped robot dog</li>
-          <li>Wheel-legged biped, hardware</li>
-          <li>RC airframes</li>
+          <li>Wheeled biped, hardware</li>
+          <li>Flying probe tester</li>
         </ul>
       </div>
       <div class="tape" aria-hidden="true"></div>
