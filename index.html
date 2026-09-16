@@ -91,7 +91,7 @@ mark { background: var(--tape); color: inherit; padding:.05em .2em; }
 .squiggle path { fill:none; stroke:currentColor; stroke-width:3.5; stroke-linecap:round; }
 .hero-sub { font-size:1.05rem; color:var(--ink-2); margin:1.6rem auto 0; max-width:34ch; }
 .hero-links { display:flex; gap:1.4rem; justify-content:center; flex-wrap:wrap;
-              margin-top:1.5rem; font-family:var(--mono); font-size:.82rem; }
+              margin-top:2.3rem; font-family:var(--mono); font-size:.82rem; }
 
 .chip { position:relative; color:var(--ink); text-decoration:none; display:block;
         line-height:1.15; font-family:var(--display); font-weight:600;
@@ -778,7 +778,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
       <span class="bar"></span>
     </a>
     <a class="chip c3" href="#rl">
-      <span class="mesh" data-empty></span>
+      <span class="mesh" id="brainMesh"></span>
       <span class="n">03</span>
       <span class="label">Reinforcement Learning <span class="arrow">↗</span></span>
       <span class="bar"></span>
@@ -803,7 +803,6 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
     <svg class="squiggle" viewBox="0 0 300 12" aria-hidden="true">
       <path d="M3 8 C 42 2, 70 11, 108 6 S 178 2, 214 8 S 268 5, 297 4"/>
     </svg>
-    <p class="hero-sub"><!--@hero.tagline-->I build things that move. Mostly by working out how, partway through.<!--/@--></p>
     <div class="hero-links">
       <a href="https://github.com/simonnnz">GitHub</a>
       <a href="#work">Projects</a>
@@ -2376,6 +2375,94 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
   function end() { drag = null; }
   stage.addEventListener("pointerup", end);
   stage.addEventListener("pointercancel", end);
+})();
+
+/* ============================================================
+   HERO BRAIN — the reinforcement-learning chip gets a network
+   instead of a CAD model: four rings of neurons wired to the
+   next, with a pulse of activation sweeping through them.
+   Built here rather than loaded, so it costs nothing to fetch.
+   ============================================================ */
+(function () {
+  var el = document.getElementById("brainMesh");
+  if (!el || !Wire.m) return;
+  var M = Wire.m;
+  var COUNT = [6, 10, 10, 4];                     /* neurons per layer */
+  var XS = [-0.50, -0.17, 0.17, 0.50];
+  var RAD = [0.26, 0.38, 0.38, 0.20];
+  var FAN = 3;                                    /* wires leaving each neuron */
+  var TAU = Math.PI * 2;
+
+  function ring(n, r, x, twist) {
+    var pts = [];
+    for (var i = 0; i < n; i++) {
+      var a = TAU * i / n + twist;
+      pts.push([x, r * Math.cos(a), r * Math.sin(a)]);
+    }
+    return pts;
+  }
+  var layers = COUNT.map(function (n, i) { return ring(n, RAD[i], XS[i], i * 0.4); });
+
+  /* a neuron is a small ring facing along the row, so it reads as a body in
+     three dimensions rather than a dot that vanishes edge-on */
+  function neuron(out, p, r) {
+    for (var i = 0; i < 8; i++) {
+      var a = TAU * i / 8, b = TAU * (i + 1) / 8;
+      out.push(p[0], p[1] + r * Math.cos(a), p[2] + r * Math.sin(a),
+               p[0], p[1] + r * Math.cos(b), p[2] + r * Math.sin(b));
+    }
+  }
+  var parts = [];
+  layers.forEach(function (pts) {
+    var o = [];
+    pts.forEach(function (p) { neuron(o, p, 0.034); });
+    parts.push(new Float32Array(o));
+  });
+  /* each neuron wires to the few nearest in the next ring: a full mesh at this
+     scale is a solid smudge */
+  for (var L = 0; L < layers.length - 1; L++) {
+    var a = layers[L], b = layers[L + 1], o = [];
+    for (var i = 0; i < a.length; i++) {
+      var near = b.map(function (q, j) {
+        var dy = q[1] - a[i][1], dz = q[2] - a[i][2];
+        return [dy * dy + dz * dz, j];
+      }).sort(function (u, w) { return u[0] - w[0]; });
+      for (var k = 0; k < FAN && k < near.length; k++) {
+        var q2 = b[near[k][1]];
+        o.push(a[i][0], a[i][1], a[i][2], q2[0], q2[1], q2[2]);
+      }
+    }
+    parts.push(new Float32Array(o));
+  }
+
+  var v = Wire.add(el, [], 0, 1, -1);
+  if (!v) return;
+  Wire.setParts(v, parts);
+  v.yaw0 = 0.30;
+  v.pitch0 = -0.16;
+  v.dist = 2.0;
+
+  var t = 0, last = 0;
+  var SCENE = M.scale(1.3);
+  v.pose = function (view, dt) {
+    var now = performance.now();
+    t += last ? Math.min(0.1, (now - last) / 1000) : 0;
+    last = now;
+    var P = Wire.palette;
+    /* the pulse runs off the end and comes back round, with a pause between */
+    var p = reduced ? 0.5 : (t * 0.42) % 1.9 - 0.25;
+    function glow(at, spread) { return Math.exp(-((p - at) * (p - at)) / spread); }
+    var draws = [];
+    for (var i = 0; i < COUNT.length; i++) {
+      draws.push({ part: i, m: SCENE, rgb: P.accent,
+                   alpha: 0.62 + 0.38 * glow(i / 3, 0.012) });
+    }
+    for (var g = 0; g < COUNT.length - 1; g++) {
+      draws.push({ part: COUNT.length + g, m: SCENE, rgb: P.accent,
+                   alpha: 0.30 + 0.50 * glow((g + 0.5) / 3, 0.02) });
+    }
+    return draws;
+  };
 })();
 
 /* ============================================================
