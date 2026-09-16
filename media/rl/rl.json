@@ -1,0 +1,331 @@
+{
+ "ctrl_hz": 100,
+ "stride": 2,
+ "bodies": [
+  "chassis",
+  "thigh_f_L",
+  "shin_f_L",
+  "thigh_r_L",
+  "shin_r_L",
+  "wheel_L",
+  "thigh_f_R",
+  "shin_f_R",
+  "thigh_r_R",
+  "shin_r_R",
+  "wheel_R"
+ ],
+ "geoms": [
+  {
+   "type": "box",
+   "body": 0,
+   "size": [
+    0.045,
+    0.085,
+    0.03
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "capsule",
+   "body": 1,
+   "size": [
+    0.005,
+    0.03,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    -0.03
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "capsule",
+   "body": 2,
+   "size": [
+    0.004,
+    0.035,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    -0.035
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "capsule",
+   "body": 3,
+   "size": [
+    0.005,
+    0.03,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    -0.03
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "capsule",
+   "body": 4,
+   "size": [
+    0.004,
+    0.035,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    -0.035
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "cylinder",
+   "body": 5,
+   "size": [
+    0.021,
+    0.006,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "quat": [
+    0.7071067811865476,
+    0.7071067811865476,
+    0.0,
+    0.0
+   ],
+   "name": "tire_L"
+  },
+  {
+   "type": "capsule",
+   "body": 6,
+   "size": [
+    0.005,
+    0.03,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    -0.03
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "capsule",
+   "body": 7,
+   "size": [
+    0.004,
+    0.035,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    -0.035
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "capsule",
+   "body": 8,
+   "size": [
+    0.005,
+    0.03,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    -0.03
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "capsule",
+   "body": 9,
+   "size": [
+    0.004,
+    0.035,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    -0.035
+   ],
+   "quat": [
+    1.0,
+    0.0,
+    0.0,
+    0.0
+   ],
+   "name": ""
+  },
+  {
+   "type": "cylinder",
+   "body": 10,
+   "size": [
+    0.021,
+    0.006,
+    0.0
+   ],
+   "pos": [
+    0.0,
+    0.0,
+    0.0
+   ],
+   "quat": [
+    0.7071067811865476,
+    0.7071067811865476,
+    0.0,
+    0.0
+   ],
+   "name": "tire_R"
+  }
+ ],
+ "columns": {
+  "pose": 77,
+  "obs": 39,
+  "action": 6,
+  "cmd": 3,
+  "actual": 3,
+  "reward": 8
+ },
+ "reward_names": [
+  "total",
+  "vel",
+  "yaw",
+  "height",
+  "upright",
+  "alive",
+  "penalties",
+  "push"
+ ],
+ "policies": {
+  "final": {
+   "label": "Trained policy",
+   "file": "policy-final.bin",
+   "run": "ppo_final",
+   "model": "final.zip",
+   "obs_dim": 39,
+   "layers": [
+    [
+     128,
+     39
+    ],
+    [
+     128,
+     128
+    ],
+    [
+     6,
+     128
+    ]
+   ],
+   "clip_obs": 10.0,
+   "eps": 1e-08,
+   "forward_check": 8.401236678556856e-08
+  }
+ },
+ "clips": [
+  {
+   "name": "drive",
+   "set": "final",
+   "file": "final-drive.bin",
+   "title": "Drive and turn",
+   "frames": 1250,
+   "fell": null,
+   "cols": 136,
+   "terrain": null
+  },
+  {
+   "name": "shove",
+   "set": "final",
+   "file": "final-shove.bin",
+   "title": "Shoved",
+   "frames": 1100,
+   "fell": null,
+   "cols": 136,
+   "terrain": null
+  },
+  {
+   "name": "terrain",
+   "set": "final",
+   "file": "final-terrain.bin",
+   "title": "Rough ground",
+   "frames": 1200,
+   "fell": null,
+   "cols": 136,
+   "terrain": {
+    "file": "final-ground-terrain.bin",
+    "n": 256,
+    "half": 4.0,
+    "amp": 0.03
+   }
+  }
+ ]
+}

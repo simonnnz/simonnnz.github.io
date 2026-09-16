@@ -1,0 +1,7 @@
+# Original photos/videos are huge; the site uses the web copies in media\
+Pictures Videos/
+# Source CAD: 145 MB, and one STL is over GitHub's 100 MB file limit. The site
+# only needs the extracted wireframes in edges\, which are built from it.
+CRC Swerve Drive Model/
+tools/__pycache__/
+index.backup.html

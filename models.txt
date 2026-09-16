@@ -1,0 +1,36 @@
+# Wireframe models
+# ----------------------------------------------------------------------------
+# One line per model. Edit the numbers, save, then run build.bat.
+#
+#   name  |  source STL  |  angle  |  min length
+#
+#   name        what the .bin is called, and what index.html points at
+#   source STL  full path to the STL. Spaces are fine, no quotes needed.
+#
+#   angle       degrees. Controls HARD edges only - corners, steps, holes.
+#                 LOWER  = more edges, more detail, bigger file
+#                 HIGHER = only the sharpest corners
+#               26 is a good default. Rounded blends are NOT controlled by
+#               this - they're found automatically by curvature contrast, so
+#               you no longer have to trade fillets against tessellation noise.
+#
+#   min length  drops edges shorter than this fraction of the model's size.
+#               Kills thread detail and tiny features that read as fuzz.
+#                 0.000 = keep everything
+#                 0.004 = good default
+#                 0.012 = aggressive, for small thumbnails
+#               Curve boundaries only get 35% of this limit applied, so
+#               raising it won't wipe out your rounded corners.
+#
+# Lines starting with # are ignored. Delete a line to stop building it.
+# ----------------------------------------------------------------------------
+
+chess-mk1   | %USERPROFILE%\Downloads\MK1 Automatic Chess Board v24.stl   | 26 | 0.004
+chess-mk2   | %USERPROFILE%\Downloads\MK2 Automatic Chess Board v16.stl   | 26 | 0.004
+chess-mk3   | %USERPROFILE%\Downloads\Automatic ChessBoard MK3 v29.stl    | 26 | 0.004
+
+dog-topleg  | %USERPROFILE%\Downloads\Top Leg.stl                         | 22 | 0.000
+dog-hipplate| %USERPROFILE%\Downloads\Hip Plate.stl                       | 22 | 0.000
+
+# The MK3 flap is built separately because it needs splitting first.
+# See EDITING.md, "Re-splitting the chess board".
