@@ -29,6 +29,14 @@ OPEN_READONLY = 2
 OPEN_SILENT = 1
 SAVE_SILENT = 1                       # swSaveAsOptions_Silent
 
+# read from swconst.tlb, not guessed: guessing these silently writes unrelated
+# settings (82 is the dimension separator, 86 is 3-view drawing scaling)
+PREF_STL_QUALITY = 78                 # swUserPreferenceIntegerValue_e.swSTLQuality
+STL_QUALITY_FINE = 2                  # swSTLQuality_e.swSTLQuality_Fine
+PREF_STL_BINARY = 69                  # swUserPreferenceToggle_e.swSTLBinaryFormat
+PREF_STL_DONT_TRANSLATE = 71          # ...swSTLDontTranslateToPositive
+PREF_STL_ONE_FILE = 72                # ...swSTLComponentsIntoOneFile
+
 
 def prop(obj, name):
     """Late binding gives properties, not accessors; call only if callable."""
@@ -67,6 +75,17 @@ def main():
             raise SystemExit("open failed, error %s warning %s" % (errs.value, warns.value))
         print("  opened in %.0f s (errors %s, warnings %s)" % (time.time() - t0, errs.value, warns.value))
 
+    # one STL for the whole assembly, in assembly coordinates. Without these,
+    # SolidWorks writes one file per component, each moved into its own
+    # positive space, and the robot cannot be reassembled from them.
+    before = {p: sw.GetUserPreferenceToggle(p) for p in
+              (PREF_STL_BINARY, PREF_STL_DONT_TRANSLATE, PREF_STL_ONE_FILE)}
+    before[PREF_STL_QUALITY] = sw.GetUserPreferenceIntegerValue(PREF_STL_QUALITY)
+    print("STL preferences before: %s" % before)
+    sw.SetUserPreferenceIntegerValue(PREF_STL_QUALITY, STL_QUALITY_FINE)
+    for p in (PREF_STL_BINARY, PREF_STL_DONT_TRANSLATE, PREF_STL_ONE_FILE):
+        sw.SetUserPreferenceToggle(p, True)
+
     title = prop(doc, "GetTitle")
     err = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 0)
     warn = win32.VARIANT(pythoncom.VT_BYREF | pythoncom.VT_I4, 0)
@@ -79,6 +98,12 @@ def main():
 
     sw.CloseDoc(title)                # closes without saving the original
     print("closed %s" % title)
+    for p, v in before.items():       # put the user's settings back
+        if p == PREF_STL_QUALITY:
+            sw.SetUserPreferenceIntegerValue(p, v)
+        else:
+            sw.SetUserPreferenceToggle(p, v)
+    print("restored STL preferences")
     if not ok or not os.path.isfile(out):
         raise SystemExit(1)
     print("%s  %.1f MB" % (out, os.path.getsize(out) / 1e6))
