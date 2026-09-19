@@ -49,6 +49,10 @@ def main():
     src = sys.argv[1]
     angle = float(sys.argv[2]) if len(sys.argv) > 2 else 30.0
     min_len = float(sys.argv[3]) if len(sys.argv) > 3 else 1.2
+    # degrees about the viewer's x axis, applied last. The leg is modelled
+    # lying down (motors at one end, wheel at the other); 90 stands it up with
+    # both hip motors on top and the wheel hanging below.
+    roll = float(sys.argv[4]) if len(sys.argv) > 4 else 0.0
 
     # one assembly STL (what solidworks_export.py writes with the right
     # preferences), or a folder of per-component files
@@ -105,6 +109,11 @@ def main():
     ext = (allp.max(0) - allp.min(0)).max()
     seg = (np.stack([p1, p2], 1) - c) / ext
     seg = seg[:, :, [0, 2, 1]] * [1, 1, -1]        # CAD z-up -> viewer y-up
+    if roll:
+        r = np.radians(roll)
+        y, z = seg[..., 1].copy(), seg[..., 2].copy()
+        seg[..., 1] = y * np.cos(r) - z * np.sin(r)
+        seg[..., 2] = y * np.sin(r) + z * np.cos(r)
     seg.astype("<f4").tofile(OUT)
     print("wrote %s  %.0f KB" % (os.path.relpath(OUT, HERE), os.path.getsize(OUT) / 1024))
 
