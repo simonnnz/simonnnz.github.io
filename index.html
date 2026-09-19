@@ -3,6 +3,20 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
+<script>
+/* Layout. "scroll": every page of a project stacked down the page, read by
+   scrolling like any site. "filmstrip": the sideways strips, where scrolling
+   past the end of a page slides to the next. The default is the one word
+   below; ?layout=scroll or ?layout=filmstrip overrides it, so both can be
+   compared on the same build. Set here, before any paint, so the page never
+   flashes the wrong one. */
+(function () {
+  var DEFAULT = "scroll";
+  var asked = new URLSearchParams(location.search).get("layout");
+  document.documentElement.dataset.layout =
+    asked === "scroll" || asked === "filmstrip" ? asked : DEFAULT;
+})();
+</script>
 <title>Simon Zhu, builds things that move</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -229,6 +243,20 @@ section.band { padding:4rem 0; border-top:1px solid var(--line); }
              text-transform:uppercase; color:var(--cool); border:1px solid currentColor;
              padding:.18rem .45rem; border-radius:2px; opacity:.85; }
 .links { font-family:var(--mono); font-size:.8rem; display:flex; gap:1.2rem; flex-wrap:wrap; }
+
+/* --- scroll layout: the filmstrip's pages, stacked --- */
+[data-layout="scroll"] .strip { display:block; overflow:visible; height:auto !important;
+                                scroll-snap-type:none; }
+[data-layout="scroll"] .frame { padding-top:3.2rem; margin-top:3.2rem;
+                                border-top:1px dashed var(--line); }
+[data-layout="scroll"] .frame:first-child { padding-top:0; margin-top:0; border-top:0; }
+[data-layout="scroll"] .strip-bar { display:none; }
+[data-layout="scroll"] .project { padding:4.5rem 0; }
+/* the left column's label ("Revisions", "Movement") becomes the sub-heading
+   of each stacked page, so it stays in view while that page scrolls past */
+[data-layout="scroll"] .frame .pcols > div:first-child { position:sticky; top:1.5rem; align-self:start; }
+[data-layout="scroll"] .frame .year { color:var(--accent); }
+@media (max-width:52rem){ [data-layout="scroll"] .frame .pcols > div:first-child { position:static; } }
 
 /* --- strip navigation --- */
 /* Back below the frames, but stuck to the bottom of the viewport for as long
@@ -3764,6 +3792,9 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
    FILMSTRIP — "see more" slides the project left
    ============================================================ */
 document.querySelectorAll("[data-project]").forEach(function (proj) {
+  /* in the scroll layout the pages simply stack, and the page's own
+     scrolling and anchors do the rest: no strip, no buttons, no capture */
+  if (document.documentElement.dataset.layout === "scroll") return;
   var strip = proj.querySelector("[data-strip]");
   var next = proj.querySelector("[data-next]");
   var prev = proj.querySelector("[data-prev]");
