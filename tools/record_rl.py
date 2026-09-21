@@ -53,7 +53,7 @@ SETS = {
                       (15.0, -0.7, 0.0, 0.0), (17.5, 0.9, -2.0, 0.0), (21.5, 0.0, 0.0, 0.0)],
                 pushes=[]),
             "shove": dict(
-                title="Shoved", seconds=22, terrain=0.0,
+                title="Pushes", seconds=22, terrain=0.0,
                 cmds=[(0.0, 0.0, 0.0, 0.0), (12.0, 0.5, 0.0, 0.0), (17.0, 0.0, 0.0, 0.0)],
                 pushes=[(3.0, 0.7, 0.0), (6.0, -0.7, 0.0), (9.0, 0.0, 0.55), (13.5, -0.6, 0.35),
                         (15.5, 0.3, -0.55), (19.0, 0.7, 0.3)]),
@@ -71,7 +71,7 @@ SETS = {
             # 2.6 only showed a gauge reading half its command. It ignores the
             # height command, same as ppo_final, so no crouch segment.
             "sprint": dict(
-                title="Full send", seconds=24, terrain=0.0,
+                title="Fast driving", seconds=24, terrain=0.0,
                 cmds=[(0.0, 0.0, 0.0, 0.0), (1.0, 1.2, 1.2, 0.0), (4.0, 1.8, 1.5, 0.0),
                       (8.5, 1.8, -1.5, 0.0), (13.0, 0.0, 6.0, 0.0), (15.5, 0.0, -6.0, 0.0),
                       (18.0, 1.2, 0.0, 0.0), (20.0, 0.0, 3.0, 0.0), (22.0, 0.0, 0.0, 0.0)],
@@ -79,7 +79,7 @@ SETS = {
             # MEASURED: a shove landing while it drives AND turns puts it down on
             # 5 of 6 seeds, so the shoves land while standing or driving straight
             "brawl": dict(
-                title="Big shoves", seconds=20, terrain=0.0,
+                title="Large pushes", seconds=20, terrain=0.0,
                 cmds=[(0.0, 0.0, 0.0, 0.0), (13.0, 1.2, 0.0, 0.0), (15.8, 0.0, 0.0, 0.0)],
                 pushes=[(2.0, 1.0, 0.0), (4.5, -1.0, 0.0), (7.0, 0.0, 0.9), (9.0, 0.7, -0.7),
                         (11.0, -0.9, 0.5), (15.0, 0.8, 0.0), (18.5, -1.0, 0.0)]),

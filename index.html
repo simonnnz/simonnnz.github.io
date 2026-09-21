@@ -23,7 +23,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 /* ============================================================
-   TOKENS — ground is graph paper, accent is oxide orange used
+   TOKENS, ground is graph paper, accent is oxide orange used
    as a working colour (rules, marks, wireframes) not decoration
    ============================================================ */
 :root {
@@ -160,7 +160,7 @@ mark { background: var(--tape); color: inherit; padding:.05em .2em; }
 }
 .chip:hover .bar::after, .chip:focus-visible .bar::after { transform:scaleX(1); }
 
-/* wireframe sits behind the words — large, ghosted, no frame */
+/* wireframe sits behind the words, large, ghosted, no frame */
 .chip .mesh {
   position:absolute; left:50%; top:50%; pointer-events:none;
   width:clamp(15rem,25vw,30rem); height:clamp(10rem,15vw,18rem);
@@ -394,7 +394,7 @@ body.lb-open #viewport { z-index:15; }
 .d-frame rect { fill:none; stroke:var(--line); stroke-width:1.5; }
 .d-idler circle { fill:var(--paper); stroke:var(--muted); stroke-width:1.5; }
 .d-beam { stroke:var(--ink); stroke-width:3; stroke-linecap:round; opacity:.55; }
-/* both belts dashed so the dashes can travel — that IS the belt movement */
+/* both belts dashed so the dashes can travel, that IS the belt movement */
 .d-belt-a, .d-belt-b {
   fill:none; stroke-width:2; stroke-linejoin:round; stroke-linecap:round;
   stroke-dasharray:6 4;
@@ -612,7 +612,6 @@ body.lb-open #viewport { z-index:15; }
 .rl-controls { grid-column:1 / -1; display:flex; align-items:center; gap:.6rem 1rem; flex-wrap:wrap; }
 .rl-set { font-family:var(--mono); font-size:.6rem; font-weight:600; letter-spacing:.14em;
           text-transform:uppercase; color:var(--accent); margin-left:.6rem; align-self:center; }
-.rl-set::before { content:"⚡ "; }
 .rl-demo-btn { border-style:dashed; }
 /* demo mode is not the real robot, and the frame says so */
 .rl-demo.is-demo .rl-stage, .rl-demo.is-demo .rl-netbox { border-color:var(--accent); border-style:dashed; }
@@ -1131,9 +1130,9 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                   <dl class="stats">
                     <dt>Depth</dt><dd id="stDepth">0</dd>
                     <dt>Nodes</dt><dd id="stNodes">0</dd>
-                    <dt>Best</dt><dd id="stBest">&mdash;</dd>
-                    <dt>Score</dt><dd id="stScore">&mdash;</dd>
-                    <dt>Time</dt><dd id="stTime">&mdash;</dd>
+                    <dt>Best</dt><dd id="stBest">n/a</dd>
+                    <dt>Score</dt><dd id="stScore">n/a</dd>
+                    <dt>Time</dt><dd id="stTime">n/a</dd>
                   </dl>
                   <p class="side-note">Brighter squares are ones the search
                      looked at more often.</p>
@@ -1383,16 +1382,17 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year"><!--@rl.year-->2026<!--/@--></span></div>
             <div>
-              <h3><!--@rl.title-->Teaching a Wheel-Legged Robot to Balance<!--/@--></h3>
-              <p class="lede"><!--@rl.lede-->A two-wheeled robot with legs, and the neural network that drives it.
-                 Nobody wrote its balance controller. It learned one in simulation, by trial and
-                 error, using reinforcement learning (PPO): about 25 million control steps, or
-                 69 hours of simulated driving.<!--/@--></p>
-              <p><!--@rl.demo-->Below is the trained policy driving in the MuJoCo simulator. The network
-                 beside it is the real one: its 22,406 weights are running in your browser, on
-                 the same sensor readings the robot had, deciding what each motor does next.
-                 The ⚡ clips are a second policy, retrained with the hardware limits taken off —
-                 the last page explains what that means.<!--/@--></p>
+              <h3><!--@rl.title-->Wheel-Leg Biped Balance Controller<!--/@--></h3>
+              <p class="lede"><!--@rl.lede-->This is the balance and driving controller for my wheel-leg biped.
+                 Instead of tuning a controller by hand, I trained a neural network in the MuJoCo
+                 simulator using reinforcement learning (PPO). Training took about 25 million
+                 control steps, which works out to 69 hours of simulated driving.<!--/@--></p>
+              <p><!--@rl.demo-->The player below replays the trained policy in simulation. The network
+                 next to it is the actual trained network. Its 22,406 weights run in your browser
+                 on the same sensor readings the simulated robot received, so the neurons lighting
+                 up are the ones deciding each motor command. The clips marked Demo mode use a
+                 second policy trained with the hardware limits removed, described at the end of
+                 this section.<!--/@--></p>
 
               <div class="rl-demo" id="rlDemo">
                 <div class="rl-stage" id="rlStage">
@@ -1401,7 +1401,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                     <span class="rl-clip" id="rlClipName">Loading…</span>
                     <span id="rlTime">0.0 s</span>
                   </div>
-                  <span class="rl-kick" id="rlKick" hidden>Shove</span>
+                  <span class="rl-kick" id="rlKick" hidden>Push</span>
                   <span class="rev-cue">Drag to orbit</span>
                 </div>
                 <div class="rl-netbox">
@@ -1438,9 +1438,9 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
               <ul class="specs"><!--@rl.specs-->
                 <li><b>22,406</b><span>weights in the network</span></li>
                 <li><b>25 M</b><span>control steps of practice</span></li>
-                <li><b>~11 h</b><span>to train, on a laptop CPU</span></li>
-                <li><b>100 Hz</b><span>decisions per second</span></li>
-                <li><b>39 → 6</b><span>sensor inputs to motor outputs</span></li>
+                <li><b>10.8 h</b><span>of training on a laptop CPU</span></li>
+                <li><b>100 Hz</b><span>control rate</span></li>
+                <li><b>39 in, 6 out</b><span>network inputs and outputs</span></li>
                 <li><b>6</b><span>simulators in parallel</span></li><!--/@-->
               </ul>
 
@@ -1454,22 +1454,22 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">The network</span></div>
             <div>
-              <h3>What it sees, and what it moves</h3>
-              <p class="lede"><!--@rl.network-->Every 10 ms the policy gets 39 numbers and returns 6. There is no
-                 memory and no physics model inside it: two layers of 128 neurons, each
-                 squashing its input through tanh, map the robot's state straight to motor
+              <h3>Inputs and outputs</h3>
+              <p class="lede"><!--@rl.network-->Every 10 ms the network takes 39 values and returns 6. It has no
+                 memory between steps and no physics model. It is two hidden layers of 128
+                 neurons with tanh activations, mapping the current state directly to motor
                  commands.<!--/@--></p>
 
               <div class="rl-io">
                 <div>
                   <p class="g-group">39 inputs</p>
                   <ul class="rl-list">
-                    <li><i style="--c:0"></i>Which way is down, in the robot's frame<em>3</em></li>
-                    <li><i style="--c:1"></i>How fast it's rotating (gyro)<em>3</em></li>
+                    <li><i style="--c:0"></i>Gravity direction in the body frame<em>3</em></li>
+                    <li><i style="--c:1"></i>Angular velocity (gyro)<em>3</em></li>
                     <li><i style="--c:2"></i>Hip angles and speeds<em>8</em></li>
                     <li><i style="--c:3"></i>Wheel speeds<em>2</em></li>
-                    <li><i style="--c:4"></i>Its own previous output<em>6</em></li>
-                    <li><i style="--c:5"></i>The command: speed, turn rate, height error<em>3</em></li>
+                    <li><i style="--c:4"></i>Previous action<em>6</em></li>
+                    <li><i style="--c:5"></i>Command: speed, turn rate, height error<em>3</em></li>
                     <li><i style="--c:6"></i>Motor winding temperatures<em>6</em></li>
                     <li><i style="--c:7"></i>Wheel odometry and accumulated tracking error<em>3</em></li>
                     <li><i style="--c:8"></i>Accelerometer<em>3</em></li>
@@ -1482,20 +1482,21 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                     <li><i class="out"></i>Hip position targets, front and rear, each side<em>4</em></li>
                     <li><i class="out"></i>Wheel torques<em>2</em></li>
                   </ul>
-                  <p class="rl-note">The hips are position-controlled: a PD loop at 1&nbsp;kHz turns each
-                     target into torque, through a 12:1 printed planetary gearbox. The wheels get
-                     torque directly. Balancing is the wheels' job; the legs set ride height and
-                     soak up the ground.</p>
+                  <p class="rl-note">The hips are position controlled. A PD loop running at 1&nbsp;kHz
+                     converts each target into a torque, through a 12:1 3D printed planetary
+                     gearbox. The wheels are commanded in torque directly. The wheels do the
+                     balancing, and the legs set the ride height and absorb uneven ground.</p>
                 </div>
               </div>
 
-              <p><!--@rl.norm-->Inputs are normalised with statistics collected during training, and those
-                 statistics are part of the policy. Export the weights without them and the
-                 network still passes its own verification, then drives nonsense. That exact bug
-                 slipped through once, so the exporter now refuses to run without them.<!--/@--></p>
-              <p><!--@rl.export-->The same weights are exported to a C header for the robot's
-                 microcontroller, and the C forward pass is checked against the Python network:
-                 they agree to within 4&times;10<sup>&minus;7</sup>.<!--/@--></p>
+              <p><!--@rl.norm-->The inputs are normalized using statistics collected during training, and
+                 the network only works with those exact statistics. If the weights are exported
+                 without them, the export still passes its own check but the robot behaves
+                 incorrectly. This happened once, so the export script now refuses to run
+                 without the matching statistics file.<!--/@--></p>
+              <p><!--@rl.export-->The weights are also exported to a C header for the microcontroller. I
+                 checked the C version of the forward pass against the Python network, and the
+                 outputs match to within 4&times;10<sup>&minus;7</sup>.<!--/@--></p>
             </div>
           </div>
         </div>
@@ -1504,49 +1505,51 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">Learning</span></div>
             <div>
-              <h3>Scored, not programmed</h3>
-              <p class="lede"><!--@rl.ppo-->PPO learns by doing. Six copies of the simulator run side by side.
-                 The policy drives each one, every step earns a score, and the network is nudged
-                 toward whatever scored better than expected. The nudges are small and clipped,
-                 so one lucky run can't wreck what it already knows.<!--/@--></p>
+              <h3>Training with PPO</h3>
+              <p class="lede"><!--@rl.ppo-->PPO trains the network from experience. Six copies of the simulator
+                 run in parallel, the policy drives each one, and every control step receives a
+                 reward. After each batch, the network is updated toward the actions that did
+                 better than expected. PPO limits how far a single update can change the policy,
+                 which keeps training stable.<!--/@--></p>
 
               <div class="rl-io">
                 <div>
-                  <p class="g-group">Earns, every step</p>
+                  <p class="g-group">Rewarded each step</p>
                   <ul class="rl-list rl-w">
                     <li>Driving at the commanded speed<em>1.5</em></li>
                     <li>Staying upright<em>0.8</em></li>
                     <li>Turning at the commanded rate<em>0.6</em></li>
                     <li>Holding ride height<em>0.5</em></li>
-                    <li>Still being alive<em>0.5</em></li>
+                    <li>Not falling<em>0.5</em></li>
                   </ul>
                 </div>
                 <div>
-                  <p class="g-group">Pays for</p>
+                  <p class="g-group">Penalized</p>
                   <ul class="rl-list rl-w neg">
                     <li>Jerky or saturated motor commands</li>
                     <li>Leg torque and joint speed</li>
-                    <li>Heating the motors past what they can shed</li>
-                    <li>Sliding sideways, hitting the ground hard</li>
-                    <li>Falling over: &minus;5, and the episode ends</li>
+                    <li>Motor temperature above what they can dissipate</li>
+                    <li>Sideways sliding and hard impacts</li>
+                    <li>Falling (&minus;5, ends the episode)</li>
                   </ul>
                 </div>
               </div>
 
-              <p><!--@rl.curriculum-->Difficulty follows a curriculum. Training starts on flat ground with a
-                 perfect robot that is mostly asked to stand still. Over the first 40% of
-                 training the ground gets rougher, the shoves harder and the robot's physical
-                 properties more random, until it is balancing a robot it can't quite know.<!--/@--></p>
+              <p><!--@rl.curriculum-->Training uses a curriculum. It starts on flat ground with an ideal
+                 robot that is mostly asked to stand still. Over the first 40% of training, the
+                 terrain gets rougher, the pushes get stronger, and the robot's physical
+                 parameters are randomized over wider ranges.<!--/@--></p>
 
               <div class="learned"><b>What I had to work out</b><!--@rl.learned-->
-                Reading why episodes ended, not just how long they lasted. Mid-run, episode
-                length fell from 1860 to 1160 steps, which is exactly the dip a harder curriculum
-                causes. It was a bug. The crouch command had been derived from nominal motor
-                values, and as the randomisation widened, 92.5% of the simulated robots were being
-                asked to hold a pose they physically could not. Another bug read the velocity
-                reward in the world frame instead of the robot's, so it scored the wrong axis
-                whenever the robot turned. Forward tracking was stuck at 52% of the command until
-                I found it.<!--/@--></div>
+                The most useful habit was checking why episodes ended, not only how long they
+                lasted. Partway through one run, episode length dropped from 1860 to 1160 steps.
+                It looked like the normal dip when the curriculum gets harder, but it was a bug.
+                The crouch command limit had been calculated from nominal motor values, and once
+                the randomization widened, 92.5% of the simulated robots could not physically hold
+                the commanded pose. A second bug computed the velocity reward in the world frame
+                instead of the robot's frame, so it measured the wrong axis whenever the robot
+                turned. Forward speed tracking was stuck at 52% of the command until I fixed
+                it.<!--/@--></div>
             </div>
           </div>
         </div>
@@ -1555,27 +1558,27 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">Sim to real</span></div>
             <div>
-              <h3>A simulator that's worse on purpose</h3>
-              <p class="lede"><!--@rl.sim2real-->A policy that only works on a perfect simulated robot is useless on a
-                 real one. So the simulator is deliberately harsher than reality. The motors are
-                 modelled from their electrical constants, with a back-EMF torque ceiling and a
-                 1&nbsp;A current limit. The windings heat up. Every episode draws a different
-                 robot.<!--/@--></p>
+              <h3>Randomization for real hardware</h3>
+              <p class="lede"><!--@rl.sim2real-->A policy trained on one perfect simulated robot will not work on the
+                 real one, so the simulation is made harder than reality on purpose. The motor
+                 model uses the measured electrical constants, with a back-EMF torque limit and a
+                 1&nbsp;A current limit, and the windings heat up with use. Each episode also uses a
+                 different randomized robot.<!--/@--></p>
 
-              <p class="g-group">Randomised every episode</p>
+              <p class="g-group">Randomized every episode</p>
               <ul class="uc-list rl-dr">
-                <li>mass &plusmn;15% + 0&ndash;150 g payload</li>
-                <li>centre of mass</li>
-                <li>floor friction 0.25&ndash;1.4</li>
-                <li>gearbox efficiency 55&ndash;92%</li>
-                <li>backlash 0&ndash;3&deg;</li>
-                <li>0&ndash;40 ms latency, dropped frames</li>
-                <li>IMU mounting error, gyro bias</li>
+                <li>mass &plusmn;15% plus a 0 to 150 g payload</li>
+                <li>centre of mass position</li>
+                <li>floor friction 0.25 to 1.4</li>
+                <li>gearbox efficiency 55 to 92%</li>
+                <li>backlash 0 to 3&deg;</li>
+                <li>0 to 40 ms latency and dropped frames</li>
+                <li>IMU mounting error and gyro bias</li>
                 <li>encoder offset and noise</li>
-                <li>motor supply 8.0&ndash;9.6 V</li>
+                <li>motor supply 8.0 to 9.6 V</li>
                 <li>tyre radius &plusmn;4%</li>
-                <li>12 mm bumps, 18 mm steps</li>
-                <li>shoves up to 0.7 m/s</li>
+                <li>12 mm bumps and 18 mm steps</li>
+                <li>pushes up to 0.7 m/s</li>
               </ul>
 
               <ul class="specs" style="margin-top:1.6rem">
@@ -1585,14 +1588,14 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 <li><b>170 mm</b><span>track width</span></li>
               </ul>
 
-              <div class="learned" id="rl-status"><b>Where it stands</b><!--@rl.status-->
-                It isn't finished, and the demo doesn't hide that. At nominal conditions it
-                balances, drives, spins on the spot and recovers from shoves. Turn rate tracks
-                within a few percent, but forward speed undershoots, reaching about two-thirds of
-                a fast command (the speed gauge under the demo shows the gap). It also ignores
-                ride-height commands. Under full randomisation it still fails about half of its
-                20-second episodes, and it can't yet reliably drive off an 18&nbsp;mm step. Next
-                comes validation, then the real robot.<!--/@--></div>
+              <div class="learned" id="rl-status"><b>Current status</b><!--@rl.status-->
+                The controller is not finished. Under nominal conditions it balances, drives,
+                turns in place and recovers from pushes. Turn rate tracks within a few percent,
+                but forward speed only reaches about two thirds of a fast command, which you can
+                see on the speed gauge in the player. It also does not follow ride height
+                commands yet. With full randomization it still fails about half of its 20 second
+                episodes, and it cannot reliably drive off an 18&nbsp;mm step. The next steps are
+                validation in simulation, then testing on the real robot.<!--/@--></div>
             </div>
           </div>
         </div>
@@ -1601,47 +1604,46 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">Demo mode</span></div>
             <div>
-              <h3>The same robot, with the limits taken off</h3>
-              <p class="lede"><!--@rl.demo-lede-->Everything above is bound by what my hardware can actually do. This
-                 isn't. I took the trained policy and kept training it in a simulator with the
-                 physical limits removed, to see what the method does when the motors stop being
-                 the constraint. It is the ⚡ clips in the player, and it will never run on the
-                 real robot.<!--/@--></p>
+              <h3>Demo version without hardware limits</h3>
+              <p class="lede"><!--@rl.demo-lede-->The policy above is limited by what my hardware can do. For this
+                 version I continued training the same policy in a simulation with the physical
+                 limits removed, to see how far the method could go when motor power was not the
+                 constraint. It appears as the Demo mode clips in the player. It is only a
+                 simulation result and will not be used on the real robot.<!--/@--></p>
 
               <div class="rl-io">
                 <div>
-                  <p class="g-group">What I took off</p>
+                  <p class="g-group">Limits removed</p>
                   <ul class="rl-list rl-w">
                     <li>Motor supply, 9.4 V<em>16.8 V</em></li>
                     <li>Current limit, 1 A<em>3 A</em></li>
                     <li>Wheel torque, 0.05 N·m<em>0.15</em></li>
                     <li>Winding heat model<em>off</em></li>
-                    <li>Every randomised property<em>off</em></li>
+                    <li>Randomization<em>off</em></li>
                   </ul>
                 </div>
                 <div>
-                  <p class="g-group">What I asked for instead</p>
+                  <p class="g-group">Commands used instead</p>
                   <ul class="rl-list rl-w">
                     <li>Speed, ±1.2 m/s<em>±2.8</em></li>
                     <li>Turn rate, ±2.5 rad/s<em>±6.0</em></li>
-                    <li>Shoves, 0.7 m/s<em>1.2</em></li>
+                    <li>Pushes, 0.7 m/s<em>1.2</em></li>
                     <li>Bumps and steps, 12 / 18 mm<em>16 / 24</em></li>
                   </ul>
                 </div>
               </div>
 
-              <p><!--@rl.demo-result-->Eight million more steps, three and a half hours. It turns at
-                 5.8 rad/s of a commanded 6.0, takes 1 m/s shoves standing up, and drives over the
-                 24&nbsp;mm step edges the honest policy fell off every single time. Survival went
-                 from about half of its episodes to 81%.<!--/@--></p>
+              <p><!--@rl.demo-result-->I trained it for another 8 million steps, which took 3.5 hours. It
+                 turns at 5.8 rad/s when asked for 6.0, stays up after 1 m/s pushes, and drives
+                 over 24&nbsp;mm steps. The hardware-limited policy fell on 18&nbsp;mm steps in all
+                 8 test runs. Episode survival went from about 50% to 81%.<!--/@--></p>
 
-              <div class="learned"><b>What it doesn't fix</b><!--@rl.demo-limits-->
-                Torque was never the whole problem. It still undershoots forward speed, reaching
-                1.24 m/s of a commanded 1.8, and it still ignores ride-height commands entirely —
-                both of which the honest policy also does, so neither is a power limit. A shove
-                landing while it drives and turns at the same time still puts it on its side, on
-                five of six starts. The interesting part of the demo is which failures survived
-                having their cause removed.<!--/@--></div>
+              <div class="learned"><b>What did not improve</b><!--@rl.demo-limits-->
+                More power did not fix everything. Forward speed still undershoots, reaching
+                1.24 m/s when asked for 1.8, and it still ignores ride height commands. The
+                hardware-limited policy has both of these problems too, so they are not caused by
+                a lack of torque. A push that lands while it is driving and turning at the same
+                time still knocks it over in five of six runs.<!--/@--></div>
             </div>
           </div>
         </div>
@@ -1705,7 +1707,7 @@ var reduced = matchMedia("(prefers-reduced-motion: reduce)").matches;
 /* ============================================================
    ONE WebGL surface, many little views.
    Each .mesh element gets its own scissor rect on a single
-   full-viewport canvas — far cheaper than one context per view.
+   full-viewport canvas, far cheaper than one context per view.
    ============================================================ */
 var Wire = (function () {
   var canvas = document.getElementById("viewport");
@@ -1713,7 +1715,7 @@ var Wire = (function () {
   if (!gl) return { add: function () {} };
 
   /* gl_Position.w is eye-space depth for a standard perspective, so fading by
-     it dims far edges — which is what tells you which face is pointing at you
+     it dims far edges, which is what tells you which face is pointing at you
      when there's no surface to occlude anything */
   var VS =
     "attribute vec3 aPos;uniform mat4 uMVP;varying float vD;" +
@@ -1739,7 +1741,7 @@ var Wire = (function () {
   /* Outline program. A cylinder's side has no hard edges, so a hard-edge
      wireframe shows only its two end circles. Each smooth edge carries the
      normals of its two faces; it is drawn only where one face points toward
-     the eye and the other away — exactly the silhouette, from any angle. */
+     the eye and the other away, exactly the silhouette, from any angle. */
   var SVS =
     "attribute vec3 aPos;attribute vec3 aN1;attribute vec3 aN2;" +
     "uniform mat4 uMVP;uniform mat4 uMV;varying float vD;varying float vS;" +
@@ -1782,7 +1784,7 @@ var Wire = (function () {
   var colour = [0.85, 0.26, 0.10];
   var palette = { accent: colour, muted: [0.48, 0.51, 0.54], cool: [0.18, 0.42, 0.47] };
   /* while the lightbox is open the canvas sits above the backdrop, so every
-     other mesh would draw over it — solo suppresses them */
+     other mesh would draw over it, solo suppresses them */
   var solo = null;
   function setSolo(v) { solo = v; }
 
@@ -1802,7 +1804,7 @@ var Wire = (function () {
   readAccent();
   matchMedia("(prefers-color-scheme: dark)").addEventListener("change", readAccent);
 
-  /* one cursor tracked globally — every mesh orients toward it, so they all
+  /* one cursor tracked globally, every mesh orients toward it, so they all
      respond to mouse movement anywhere on the page, not just on hover */
   var mouse = { x: 0, y: 0, seen: false };
   addEventListener("pointermove", function (e) {
@@ -1827,7 +1829,7 @@ var Wire = (function () {
     });
   }, { rootMargin: "400px" });
 
-  /* (re)point a view at a set of edge files — used both at startup and when the
+  /* (re)point a view at a set of edge files, used both at startup and when the
      lightbox switches revisions */
   function free(parts) {
     (parts || []).forEach(function (p) {
@@ -1862,7 +1864,7 @@ var Wire = (function () {
       }).catch(function (e) { console.warn("wireframe failed:", url, e); });
 
       /* views that ask for outlines also fetch name.sil.bin (18 bytes/edge:
-         int16 positions x6, int8 normals x6 — see extract_silhouettes) */
+         int16 positions x6, int8 normals x6, see extract_silhouettes) */
       if (!v.outlines || !sprog) return;
       fetch(url.replace(/\.bin$/, ".sil.bin")).then(function (r) {
         if (!r.ok) throw new Error(r.status);
@@ -1955,7 +1957,7 @@ var Wire = (function () {
   }
 
   /* Measured, not guessed. The STEP assembly has a part called
-     "Casing / Shafts" — a 404 mm rod at model y -8.1, z -172.7 — with the
+     "Casing / Shafts", a 404 mm rod at model y -8.1, z -172.7, with the
      hinge bearings sitting on it. Mapped into viewer space through the same
      frame the meshes use (centre -25.50 -19.66 -17.54, extent 531.02):
          y = (-8.1  + 19.66) / 531.02 =  0.0218
@@ -1972,7 +1974,7 @@ var Wire = (function () {
               orbit: false, depthFade: true, segments: 0,
               lid: 0, lidV: 0, lidTo: 0,
               /* a mesh inside a filmstrip must not draw while its frame is
-                 slid out of view — the canvas knows nothing of DOM clipping */
+                 slid out of view, the canvas knows nothing of DOM clipping */
               clip: el.closest("[data-strip], [data-clip]"),
               /* optional: function (v, dt) -> [{ part, m, alpha, rgb }] to pose
                  each part (and draw a part several times) instead of drawing
@@ -1980,8 +1982,8 @@ var Wire = (function () {
               pose: null };
     views.push(v);
     /* Don't fetch until the mesh is nearly on screen. Off-screen filmstrip
-       frames stay unfetched until you slide to them, and on narrow screens —
-       where .mesh is display:none — nothing downloads at all. */
+       frames stay unfetched until you slide to them, and on narrow screens -
+       where .mesh is display:none, nothing downloads at all. */
     if (urls.length) {
       v.pending = urls;
       lazy.observe(el);
@@ -2184,7 +2186,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
 });
 
 /* ============================================================
-   SWERVE MODULE — the module steers inside the fixed outer
+   SWERVE MODULE, the module steers inside the fixed outer
    chassis; the second slider takes it apart. Geometry comes from
    tools/swerve_edges.py, which puts every part in one frame:
    origin on the steering axis, y up, 200 mm = 1 unit.
@@ -2452,7 +2454,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
 })();
 
 /* ============================================================
-   HERO BRAIN — the reinforcement-learning chip gets a network
+   HERO BRAIN, the reinforcement-learning chip gets a network
    instead of a CAD model: four rings of neurons wired to the
    next, with a pulse of activation sweeping through them.
    Built here rather than loaded, so it costs nothing to fetch.
@@ -2540,7 +2542,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
 })();
 
 /* ============================================================
-   RL DEMO — the trained policy, replayed. Poses are what the
+   RL DEMO, the trained policy, replayed. Poses are what the
    simulator did (tools/record_rl.py); the network is run here,
    live, on the observations the robot had at each step, and its
    output is checked against the actions the simulator applied.
@@ -3021,7 +3023,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
       var pushCol = meta.columns.pose + meta.columns.obs + meta.columns.action + meta.columns.cmd + meta.columns.actual + 7;
       for (var j = lastFrame + 1; lastFrame >= 0 && j <= f0 && j - lastFrame < 20; j++) {
         if (d[j * cols + pushCol] > 0) {
-          kickEl.textContent = "Shove  " + d[j * cols + pushCol].toFixed(2) + " m/s";
+          kickEl.textContent = "Push " + d[j * cols + pushCol].toFixed(2) + " m/s";
           kickEl.hidden = true; void kickEl.offsetWidth; kickEl.hidden = false;
         }
       }
@@ -3265,9 +3267,9 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
   function stats(d) {
     st.depth.textContent = d.depth || 0;
     st.nodes.textContent = (d.nodes || 0).toLocaleString();
-    st.best.textContent = d.from >= 0 && d.to >= 0 ? alg(d.from) + alg(d.to) : "—";
+    st.best.textContent = d.from >= 0 && d.to >= 0 ? alg(d.from) + alg(d.to) : "n/a";
     /* micro-Max scores from the mover's side; negate so it reads from yours */
-    st.score.textContent = d.from >= 0 ? ((-d.score) / 100).toFixed(2) : "—";
+    st.score.textContent = d.from >= 0 ? ((-d.score) / 100).toFixed(2) : "n/a";
     if (d.visits) paintHeat(d.visits);
   }
 
@@ -3315,7 +3317,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
     if (!worker) return;
     busy = false; sel = -1; legal = [];
     worker.postMessage({ cmd: "reset" });
-    st.time.textContent = "—";
+    st.time.textContent = "n/a";
   });
 
   /* ---- input: click-click or drag, both land in the same place ---- */
@@ -3391,7 +3393,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
 }());
 
 /* ============================================================
-   CoreXY — both motors fixed to the frame; neither is an axis
+   CoreXY, both motors fixed to the frame; neither is an axis
    ============================================================ */
 (function () {
   var svg = document.getElementById("cxy");
@@ -3523,7 +3525,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
 }());
 
 /* ============================================================
-   Sensor matrix — 64 three-pin sensors, 4 mux, 8 Arduino pins
+   Sensor matrix, 64 three-pin sensors, 4 mux, 8 Arduino pins
    ============================================================ */
 (function () {
   var svg = document.getElementById("mux");
@@ -3605,7 +3607,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
     cells.forEach(function (el2, n) { el2.classList.toggle("on", n === i); });
     muxes.forEach(function (mm, n) { mm.g.classList.toggle("on", n === mux); });
 
-    /* the full route, all the way to the pin — sensor, mux, Arduino */
+    /* the full route, all the way to the pin, sensor, mux, Arduino */
     var sx = GX + c * CELL + CELL / 2, sy = GY + r * CELL + CELL / 2;
     var bend = MX - 18 - mux * 4;
     var my = muxes[mux].y;
@@ -3632,7 +3634,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
 }());
 
 /* ============================================================
-   LIGHTBOX — click a revision, orbit it properly
+   LIGHTBOX, click a revision, orbit it properly
    ============================================================ */
 (function () {
   var box = document.getElementById("lightbox");
@@ -3676,7 +3678,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
     if (hasLid) {
       setLid(false);
       /* Crack it open and let it fall shut once, shortly after opening. Nobody
-         reads a hint, but everybody notices a thing that moved — and it makes
+         reads a hint, but everybody notices a thing that moved, and it makes
          the separate lid obvious without a line of instructions. */
       if (!reduced) {
         peekTimers.push(setTimeout(function () { Wire.lid(view, 0.34); }, 620));
@@ -3731,7 +3733,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
   });
   closeBtn.addEventListener("click", hide);
   box.addEventListener("click", function (e) {
-    /* a drag that ends on the backdrop still fires a click — don't treat
+    /* a drag that ends on the backdrop still fires a click, don't treat
        "finished rotating" as "clicked outside" */
     if (moveDist > 5) { moveDist = 0; return; }
     if (e.target === box || e.target === stage) hide();
@@ -3789,7 +3791,7 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
 }());
 
 /* ============================================================
-   FILMSTRIP — "see more" slides the project left
+   FILMSTRIP, "see more" slides the project left
    ============================================================ */
 document.querySelectorAll("[data-project]").forEach(function (proj) {
   /* in the scroll layout the pages simply stack, and the page's own
@@ -3967,7 +3969,7 @@ document.querySelectorAll("[data-project]").forEach(function (proj) {
 });
 
 /* ============================================================
-   GALLERY — click a thumbnail to see it large; arrows browse
+   GALLERY, click a thumbnail to see it large; arrows browse
    within the same gallery
    ============================================================ */
 (function () {
@@ -3997,7 +3999,7 @@ document.querySelectorAll("[data-project]").forEach(function (proj) {
         el.classList.toggle("is-tall", el.naturalHeight > el.naturalWidth);
       });
     }
-    /* the thumbnail is already loaded, so its shape is known immediately —
+    /* the thumbnail is already loaded, so its shape is known immediately -
        no jump from big to small when the full-size file arrives */
     var th = it.querySelector("img");
     if (th.naturalWidth) el.classList.toggle("is-tall", th.naturalHeight > th.naturalWidth);
@@ -4050,7 +4052,7 @@ if (!reduced) {
 }
 
 /* ============================================================
-   CLAW — two arms on fixed pivots, each tangent to the game piece.
+   CLAW, two arms on fixed pivots, each tangent to the game piece.
    Proportions from the CAD sketch (top view, y down): pivots 580
    apart, piece radius 135 = the pivots' height above its centre
    line, travel 135..445. So at either end the near arm hangs
