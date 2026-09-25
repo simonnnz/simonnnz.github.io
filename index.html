@@ -110,6 +110,12 @@ mark { background: var(--tape); color: inherit; padding:.05em .2em; }
 .hero-links { display:flex; gap:1.4rem; justify-content:center; flex-wrap:wrap;
               margin-top:2.3rem; font-family:var(--mono); font-size:.82rem; }
 
+/* the language switch sits with the hero links and looks like one */
+.lang { font: inherit; color: var(--accent); background: none; border: 0; padding: 0;
+        cursor: pointer; text-decoration: underline; text-decoration-thickness: 1.5px;
+        text-underline-offset: 3px; }
+.lang:hover { color: var(--accent-2); }
+
 /* contents list next to the résumé link: a details element, so it opens with
    the keyboard and needs no script */
 .toc { position:relative; }
@@ -861,7 +867,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
   </div>
 
   <div class="hero-core">
-    <p class="kicker"><!--@hero.kicker-->Mechatronics Engineering · University of Waterloo<!--/@--></p>
+    <p data-t="hero.kicker" class="kicker"><!--@hero.kicker-->Mechatronics Engineering · University of Waterloo<!--/@--></p>
     <h1 id="name"><!--@hero.name-->Simon Zhu<!--/@--></h1>
     <svg class="squiggle" viewBox="0 0 300 12" aria-hidden="true">
       <path d="M3 8 C 42 2, 70 11, 108 6 S 178 2, 214 8 S 268 5, 297 4"/>
@@ -880,6 +886,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
         </ol>
       </details>
       <a href="https://github.com/simonnnz">GitHub</a>
+      <button class="lang" id="langBtn" type="button" lang="fr" aria-pressed="false">Français</button>
     </div>
   </div>
   <span class="scroll-cue">Scroll</span>
@@ -899,11 +906,11 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year"><!--@chess.year-->2023-2025<!--/@--></span></div>
             <div>
               <h3><!--@chess.title-->CHECK-MATE, the Automated Chess Board<!--/@--></h3>
-              <p class="lede"><!--@chess.lede-->A real chess board that plays you by itself. A sensor grid reads the
+              <p data-t="chess.lede" class="lede"><!--@chess.lede-->A real chess board that plays you by itself. A sensor grid reads the
                  positions and a CoreXY gantry carries an electromagnet beneath the board.
                  H.G. Muller's micro-Max engine, adapted and retrofitted for the machine, runs
                  natively on an Arduino with no computer in the loop.<!--/@--></p>
-              <p>Under each square is a Hall effect sensor detecting pieces, which passes what it
+              <p data-t="chess.sensors-intro">Under each square is a Hall effect sensor detecting pieces, which passes what it
                  sees to the Arduino, which then moves the opposing pieces using the CoreXY gantry.</p>
 
               <a class="preview" href="#chess-gallery" data-goto aria-label="Open the Check-Mate photo and video gallery">
@@ -931,14 +938,14 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
               <div class="disc"><!--@chess.disciplines--><span>Mechanical</span><span>Electronics</span><span>Firmware</span>
                 <span>Algorithms</span><span>Manufacturing</span><!--/@--></div>
 
-              <p><!--@chess.access--><strong>Built to be played with.</strong> Difficulty is adjustable through
+              <p data-t="chess.access"><!--@chess.access--><strong>Built to be played with.</strong> Difficulty is adjustable through
                  search depth, so a beginner and a stronger player get a game rather than a
                  formality. An LED matrix under the board lights the legal moves for a piece you
                  pick up, and the moves the engine would consider best, which turns a game into
                  a lesson. And every move is announced aloud, so someone who can't easily read a
                  board across the table can still follow the game.<!--/@--></p>
 
-              <p><!--@chess.awards--><strong>Provincial finalist, Hydro-Québec Science Fair.</strong>
+              <p data-t="chess.awards"><!--@chess.awards--><strong>Provincial finalist, Hydro-Québec Science Fair.</strong>
                  OIQ (Ordre des ingénieurs du Québec) award for technical complexity, OCTAS Youth
                  Innovation award, and a Université de Sherbrooke scholarship.<!--/@--></p>
 
@@ -952,7 +959,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">Revisions</span></div>
             <div>
               <h3>Three builds to get here</h3>
-              <p class="lede"><!--@chess.revisions-->Across 18 months I prototyped three complete systems to reach a working
+              <p data-t="chess.revisions" class="lede"><!--@chess.revisions-->Across 18 months I prototyped three complete systems to reach a working
                  board. Real geometry below, straight from the CAD.<!--/@--></p>
               <div class="revs">
                 <div class="rev">
@@ -992,7 +999,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 </div>
               </div>
 
-              <div class="learned" style="margin-top:2rem"><b>What I had to work out</b><!--@chess.learned-->
+              <div data-t="chess.learned" style="margin-top:2rem"><b>What I had to work out</b><!--@chess.learned-->
                 System integration and electronics packaging. It was the first time I'd worked
                 under so many constraints at once. Motors, drivers, and the electromagnet itself
                 all threw electromagnetic interference across the sensor grid. Wiring,
@@ -1010,7 +1017,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">Movement</span></div>
             <div>
               <h3>Neither motor is an axis</h3>
-              <p class="lede"><!--@chess.movement-->CoreXY is a compact but more complex way to get cartesian movement,
+              <p data-t="chess.movement" class="lede"><!--@chess.movement-->CoreXY is a compact but more complex way to get cartesian movement,
                  commonly used in 3D printers. Both motors stay bolted to the frame, so none of
                  their weight moves. The trade is that neither one drives X or Y on its own, since
                  every move is a combination of the two. Drag the magnet, or drive one motor at a
@@ -1059,7 +1066,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 <button class="d-btn" data-cxy="x">Both, same way</button>
                 <button class="d-btn" data-cxy="y">Both, opposed</button>
               </div>
-              <p class="note" style="margin-top:.9rem">
+              <p data-t="chess.corexy-note" class="note" style="margin-top:.9rem">
                 <svg viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 C 8 12, 16 8, 23 3 M23 3 L17 4 M23 3 L22 9"/></svg>
                 one motor alone gives a diagonal, which is the whole idea
               </p>
@@ -1073,7 +1080,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">Sensor grid</span></div>
             <div>
               <h3>64 sensors, 8 pins</h3>
-              <p class="lede"><!--@chess.sensing-->Under each square is a Hall effect sensor, which detects not only
+              <p data-t="chess.sensing" class="lede"><!--@chess.sensing-->Under each square is a Hall effect sensor, which detects not only
                  that a piece is there but also its polarity. Each one has three pins. Power and
                  ground sit on shared rails, so only the signal leg is unique, and the 64 signals
                  fan into four 16-channel multiplexers before reaching the Arduino. Hover a square
@@ -1096,7 +1103,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 </figcaption>
               </figure>
 
-              <p class="note" style="margin-top:.9rem">
+              <p data-t="chess.mux-note" class="note" style="margin-top:.9rem">
                 <svg viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 C 8 12, 16 8, 23 3 M23 3 L17 4 M23 3 L22 9"/></svg>
                 the select lines are shared, so all four mux read the same channel at once
               </p>
@@ -1109,11 +1116,11 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">The engine</span></div>
             <div>
               <h3>Play the firmware</h3>
-              <p class="lede"><!--@chess.engine-->The chess itself is a
+              <p data-t="chess.engine" class="lede"><!--@chess.engine-->The chess itself is a
                  <a href="https://home.hccnet.nl/h.g.muller/max-src2.html">minimax engine by
                  H.G. Muller</a>, retrofitted for my own chess board's needs: difficulty through
                  search depth, an LED grid for legal moves, and an LED grid for best moves.<!--/@--></p>
-              <p>The algorithm calculates moves in a tree to see which future branch awards it the
+              <p data-t="chess.engine-tree">The algorithm calculates moves in a tree to see which future branch awards it the
                  most advantage, while minimising the opponent's.</p>
 
               <div class="chess-wrap">
@@ -1135,7 +1142,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                     <dt>Score</dt><dd id="stScore">n/a</dd>
                     <dt>Time</dt><dd id="stTime">n/a</dd>
                   </dl>
-                  <p class="side-note">Brighter squares are ones the search
+                  <p data-t="chess.heat-note" class="side-note">Brighter squares are ones the search
                      looked at more often.</p>
                 </aside>
               </div>
@@ -1195,11 +1202,11 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">2025</span></div>
             <div>
               <h3><!--@crc.title-->CRC Competition Robot<!--/@--></h3>
-              <p class="lede"><!--@crc.lede-->Over the course of 8 months, I developed the robot for John
+              <p data-t="crc.lede" class="lede"><!--@crc.lede-->Over the course of 8 months, I developed the robot for John
                  Abbott's robotics team, competing in the Canadian Robotics Competition. I built a
                  swerve drive drivetrain, and a dual claw mechanism to both stack and move game
                  pieces, movable in all three axes independently from the drive base.<!--/@--></p>
-              <p><!--@crc.award--><strong>These ideas placed us 2nd for Robot Design.</strong><!--/@--></p>
+              <p data-t="crc.award"><!--@crc.award--><strong>These ideas placed us 2nd for Robot Design.</strong><!--/@--></p>
 
               <div class="robot">
                 <button class="rev-open" data-title="CRC 2026 robot" data-tris="2515712" data-srckb="122838"
@@ -1237,10 +1244,10 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 <button class="g-item" data-full="media/crc/swerve-drive-complete.jpg"><span class="g-thumb"><img src="media/crc/swerve-drive-complete.jpg" alt="CAD of a complete swerve module mounted in the drive base: steering pulley on top, drive motor and gearbox below" loading="lazy"></span><span class="g-cap">Swerve module, CAD</span></button>
               </div>
               <p class="lede"><strong>Drivetrain – Swerve Drive</strong></p>
-              <p>A swerve drive is a powered wheel that can steer in all 360 degrees. Syncing the
+              <p data-t="crc.swerve-what">A swerve drive is a powered wheel that can steer in all 360 degrees. Syncing the
                  steering and drive of all four wheels lets the robot drive in any direction
                  without changing its orientation.</p>
-              <p><strong>Designed to be swapped, not repaired.</strong> Each module is
+              <p data-t="crc.swap"><strong>Designed to be swapped, not repaired.</strong> Each module is
                  self-contained and held in by just four bolts. Take them out and the whole module
                  drops out from below, and a fresh one goes in the same way.</p>
               <ul class="specs sw-specs">
@@ -1282,7 +1289,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">Claw</span></div>
             <div>
               <h3>Two chopsticks, one game piece</h3>
-              <p class="lede">The claw doesn't grip. Two arms on fixed pivots act like chopsticks: each
+              <p data-t="crc.claw" class="lede">The claw doesn't grip. Two arms on fixed pivots act like chopsticks: each
                  one stays tangent to the game piece, one on either side, so swinging them pushes
                  the piece side to side while it's held from both directions the whole way.
                  The game scores a multiplier for stacked pieces, so placement has to be exact.
@@ -1325,7 +1332,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                   <button class="d-btn" data-claw="1">Push right</button>
                   <button class="d-btn" data-claw="sweep" aria-pressed="false">Sweep</button>
                 </div>
-                <p class="note" style="margin-top:.9rem">
+                <p data-t="crc.claw-note" class="note" style="margin-top:.9rem">
                   <svg viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 C 8 12, 16 8, 23 3 M23 3 L17 4 M23 3 L22 9"/></svg>
                   at either end of its travel, the near arm points straight down
                 </p>
@@ -1384,11 +1391,11 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year"><!--@rl.year-->2026<!--/@--></span></div>
             <div>
               <h3><!--@rl.title-->Wheel-Leg Biped Balance Controller<!--/@--></h3>
-              <p class="lede"><!--@rl.lede-->This is the balance and driving controller for my wheel-leg biped.
+              <p data-t="rl.lede" class="lede"><!--@rl.lede-->This is the balance and driving controller for my wheel-leg biped.
                  Instead of tuning a controller by hand, I trained a neural network in the MuJoCo
                  simulator using reinforcement learning (PPO). Training took about 25 million
                  control steps, which works out to 69 hours of simulated driving.<!--/@--></p>
-              <p><!--@rl.demo-->The player below replays the trained policy in simulation. The network
+              <p data-t="rl.demo"><!--@rl.demo-->The player below replays the trained policy in simulation. The network
                  next to it is the actual trained network. Its 22,406 weights run in your browser
                  on the same sensor readings the simulated robot received, so the neurons lighting
                  up are the ones deciding each motor command. The clips marked Demo mode use a
@@ -1456,7 +1463,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">The network</span></div>
             <div>
               <h3>Inputs and outputs</h3>
-              <p class="lede"><!--@rl.network-->Every 10 ms the network takes 39 values and returns 6. It has no
+              <p data-t="rl.network" class="lede"><!--@rl.network-->Every 10 ms the network takes 39 values and returns 6. It has no
                  memory between steps and no physics model. It is two hidden layers of 128
                  neurons with tanh activations, mapping the current state directly to motor
                  commands.<!--/@--></p>
@@ -1483,19 +1490,19 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                     <li><i class="out"></i>Hip position targets, front and rear, each side<em>4</em></li>
                     <li><i class="out"></i>Wheel torques<em>2</em></li>
                   </ul>
-                  <p class="rl-note">The hips are position controlled. A PD loop running at 1&nbsp;kHz
+                  <p data-t="rl.hips-note" class="rl-note">The hips are position controlled. A PD loop running at 1&nbsp;kHz
                      converts each target into a torque, through a 12:1 3D printed planetary
                      gearbox. The wheels are commanded in torque directly. The wheels do the
                      balancing, and the legs set the ride height and absorb uneven ground.</p>
                 </div>
               </div>
 
-              <p><!--@rl.norm-->The inputs are normalized using statistics collected during training, and
+              <p data-t="rl.norm"><!--@rl.norm-->The inputs are normalized using statistics collected during training, and
                  the network only works with those exact statistics. If the weights are exported
                  without them, the export still passes its own check but the robot behaves
                  incorrectly. This happened once, so the export script now refuses to run
                  without the matching statistics file.<!--/@--></p>
-              <p><!--@rl.export-->The weights are also exported to a C header for the microcontroller. I
+              <p data-t="rl.export"><!--@rl.export-->The weights are also exported to a C header for the microcontroller. I
                  checked the C version of the forward pass against the Python network, and the
                  outputs match to within 4&times;10<sup>&minus;7</sup>.<!--/@--></p>
             </div>
@@ -1507,7 +1514,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">Learning</span></div>
             <div>
               <h3>Training with PPO</h3>
-              <p class="lede"><!--@rl.ppo-->PPO trains the network from experience. Six copies of the simulator
+              <p data-t="rl.ppo" class="lede"><!--@rl.ppo-->PPO trains the network from experience. Six copies of the simulator
                  run in parallel, the policy drives each one, and every control step receives a
                  reward. After each batch, the network is updated toward the actions that did
                  better than expected. PPO limits how far a single update can change the policy,
@@ -1536,12 +1543,12 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 </div>
               </div>
 
-              <p><!--@rl.curriculum-->Training uses a curriculum. It starts on flat ground with an ideal
+              <p data-t="rl.curriculum"><!--@rl.curriculum-->Training uses a curriculum. It starts on flat ground with an ideal
                  robot that is mostly asked to stand still. Over the first 40% of training, the
                  terrain gets rougher, the pushes get stronger, and the robot's physical
                  parameters are randomized over wider ranges.<!--/@--></p>
 
-              <div class="learned"><b>What I had to work out</b><!--@rl.learned-->
+              <div data-t="rl.learned"><b>What I had to work out</b><!--@rl.learned-->
                 The most useful habit was checking why episodes ended, not only how long they
                 lasted. Partway through one run, episode length dropped from 1860 to 1160 steps.
                 It looked like the normal dip when the curriculum gets harder, but it was a bug.
@@ -1560,7 +1567,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">Sim to real</span></div>
             <div>
               <h3>Randomization for real hardware</h3>
-              <p class="lede"><!--@rl.sim2real-->A policy trained on one perfect simulated robot will not work on the
+              <p data-t="rl.sim2real" class="lede"><!--@rl.sim2real-->A policy trained on one perfect simulated robot will not work on the
                  real one, so the simulation is made harder than reality on purpose. The motor
                  model uses the measured electrical constants, with a back-EMF torque limit and a
                  1&nbsp;A current limit, and the windings heat up with use. Each episode also uses a
@@ -1589,7 +1596,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 <li><b>170 mm</b><span>track width</span></li>
               </ul>
 
-              <div class="learned" id="rl-status"><b>Current status</b><!--@rl.status-->
+              <div data-t="rl.status" id="rl-status"><b>Current status</b><!--@rl.status-->
                 The controller is not finished. Under nominal conditions it balances, drives,
                 turns in place and recovers from pushes. Turn rate tracks within a few percent,
                 but forward speed only reaches about two thirds of a fast command, which you can
@@ -1606,7 +1613,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">Demo mode</span></div>
             <div>
               <h3>Demo version without hardware limits</h3>
-              <p class="lede"><!--@rl.demo-lede-->The policy above is limited by what my hardware can do. For this
+              <p data-t="rl.demo-lede" class="lede"><!--@rl.demo-lede-->The policy above is limited by what my hardware can do. For this
                  version I continued training the same policy in a simulation with the physical
                  limits removed, to see how far the method could go when motor power was not the
                  constraint. It appears as the Demo mode clips in the player. It is only a
@@ -1634,12 +1641,12 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 </div>
               </div>
 
-              <p><!--@rl.demo-result-->I trained it for another 8 million steps, which took 3.5 hours. It
+              <p data-t="rl.demo-result"><!--@rl.demo-result-->I trained it for another 8 million steps, which took 3.5 hours. It
                  turns at 5.8 rad/s when asked for 6.0, stays up after 1 m/s pushes, and drives
                  over 24&nbsp;mm steps. The hardware-limited policy fell on 18&nbsp;mm steps in all
                  8 test runs. Episode survival went from about 50% to 81%.<!--/@--></p>
 
-              <div class="learned"><b>What did not improve</b><!--@rl.demo-limits-->
+              <div data-t="rl.demo-limits"><b>What did not improve</b><!--@rl.demo-limits-->
                 More power did not fix everything. Forward speed still undershoots, reaching
                 1.24 m/s when asked for 1.8, and it still ignores ride height commands. The
                 hardware-limited policy has both of these problems too, so they are not caused by
@@ -1672,7 +1679,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
       <div class="uc-body">
         <span class="flag">Under construction</span>
         <h2>Sorry, the rest is still being built.</h2>
-        <p>More projects are on the way. I'd rather put them up once they're finished than show you
+        <p data-t="uc.body">More projects are on the way. I'd rather put them up once they're finished than show you
            half a page.</p>
         <ul class="uc-list">
           <li>Wheeled biped, hardware</li>
@@ -1695,7 +1702,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <a href="https://github.com/simonnnz">GitHub</a>
         </div>
       </div>
-      <p class="colophon">Hand-written HTML, CSS, and WebGL. No framework, no build step.<br>
+      <p data-t="foot.colophon" class="colophon">Hand-written HTML, CSS, and WebGL. No framework, no build step.<br>
          Wireframes are feature edges extracted from the original CAD.</p>
     </div>
   </div>
@@ -4189,6 +4196,52 @@ if (!reduced) {
   svg.addEventListener("pointercancel", end);
 
   draw();
+})();
+
+/* ============================================================
+   LANGUAGE — the prose paragraphs in French, on demand.
+   Every translatable paragraph carries data-t="key"; French for
+   the same keys lives in media/i18n/fr.json and is fetched the
+   first time it is asked for. Headings, lists and the labels on
+   the interactive parts stay in English for now.
+   ============================================================ */
+(function () {
+  var btn = document.getElementById("langBtn");
+  if (!btn) return;
+  var nodes = [].slice.call(document.querySelectorAll("[data-t]"));
+  var english = {}, french = null, lang = "en";
+  nodes.forEach(function (el) { english[el.dataset.t] = el.innerHTML; });
+
+  function paint() {
+    nodes.forEach(function (el) {
+      var t = lang === "fr" && french ? french[el.dataset.t] : null;
+      el.innerHTML = t || english[el.dataset.t];
+      if (t) el.lang = "fr"; else el.removeAttribute("lang");
+    });
+    btn.textContent = lang === "fr" ? "English" : "Français";
+    btn.lang = lang === "fr" ? "en" : "fr";
+    btn.setAttribute("aria-pressed", String(lang === "fr"));
+    try { localStorage.setItem("lang", lang); } catch (e) {}
+  }
+  function set(next) {
+    lang = next;
+    if (lang === "fr" && !french) {
+      fetch("media/i18n/fr.json").then(function (r) {
+        if (!r.ok) throw new Error(r.status);
+        return r.json();
+      }).then(function (j) { french = j; paint(); })
+        .catch(function (e) { console.warn("french text failed:", e); lang = "en"; paint(); });
+      return;
+    }
+    paint();
+  }
+  btn.addEventListener("click", function () { set(lang === "fr" ? "en" : "fr"); });
+
+  var asked = new URLSearchParams(location.search).get("lang");
+  var saved = null;
+  try { saved = localStorage.getItem("lang"); } catch (e) {}
+  if (asked === "fr" || asked === "en") set(asked);
+  else if (saved === "fr") set("fr");
 })();
 
 /* ---- scroll reveal ----
