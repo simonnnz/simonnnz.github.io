@@ -79,7 +79,7 @@ def geom_lines(out, kind, size, pos, R):
 
 def main():
     rl = sys.argv[1] if len(sys.argv) > 1 else os.path.join(
-        os.path.expanduser("~"), "projects", "biped", "rl")
+        os.path.expanduser("~"), "Documents", "Projects", "Biped", "rl")
     import mujoco
     m = mujoco.MjModel.from_xml_path(os.path.join(rl, "biped.mjcf"))
     d = mujoco.MjData(m)

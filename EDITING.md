@@ -4,7 +4,7 @@ Everything lives in one folder. There is no build step for the site itself â€
 `index.html` is the whole thing.
 
 ```
-portfolio-draft\
+Portfolio\
   index.html      the entire site: content, styling, and the WebGL viewer
   models.txt      which STLs become wireframes, and at what settings
   build.bat       rebuilds the wireframes after you edit models.txt
