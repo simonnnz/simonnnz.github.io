@@ -17,7 +17,7 @@
     asked === "scroll" || asked === "filmstrip" ? asked : DEFAULT;
 })();
 </script>
-<title>Simon Zhu, builds things that move</title>
+<title>Simon Zhu, Mechatronics Engineering portfolio</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400;12..96,600;12..96,800&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
@@ -885,7 +885,6 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <li><a href="#construction">Flying probe tester <span>in progress</span></a></li>
         </ol>
       </details>
-      <a href="https://github.com/simonnnz">GitHub</a>
       <button class="lang" id="langBtn" type="button" lang="fr" aria-pressed="false">Français</button>
     </div>
   </div>
@@ -906,12 +905,12 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year"><!--@chess.year-->2023-2025<!--/@--></span></div>
             <div>
               <h3><!--@chess.title-->CHECK-MATE, the Automated Chess Board<!--/@--></h3>
-              <p data-t="chess.lede" class="lede"><!--@chess.lede-->A real chess board that plays you by itself. A sensor grid reads the
-                 positions and a CoreXY gantry carries an electromagnet beneath the board.
-                 H.G. Muller's micro-Max engine, adapted and retrofitted for the machine, runs
-                 natively on an Arduino with no computer in the loop.<!--/@--></p>
-              <p data-t="chess.sensors-intro">Under each square is a Hall effect sensor detecting pieces, which passes what it
-                 sees to the Arduino, which then moves the opposing pieces using the CoreXY gantry.</p>
+              <p data-t="chess.lede" class="lede"><!--@chess.lede-->Check-Mate is a chess board that plays against you on its own. A sensor
+                 grid reads where the pieces are, and a CoreXY gantry carries an electromagnet
+                 under the board. The engine is H.G. Muller's micro-Max, which I adapted for the
+                 board, and it runs on the Arduino itself with no computer connected.<!--/@--></p>
+              <p data-t="chess.sensors-intro">Each square has a Hall effect sensor that detects the pieces. The Arduino reads
+                 the sensors and moves the opposing pieces with the CoreXY gantry.</p>
 
               <a class="preview" href="#chess-gallery" data-goto aria-label="Open the Check-Mate photo and video gallery">
                 <span class="pv-main">
@@ -931,18 +930,17 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                 <li><b>250+</b><span>individual components</span></li>
                 <li><b>40 m</b><span>of wiring</span></li>
                 <li><b>18</b><span>months, 3 full builds</span></li>
-                <li><b>2 KB</b><span>the entire chess engine</span></li>
+                <li><b>2 KB</b><span>for the whole chess engine</span></li>
                 <li><b>8</b><span>Arduino pins for 64 squares</span></li><!--/@-->
               </ul>
 
               <div class="disc"><!--@chess.disciplines--><span>Mechanical</span><span>Electronics</span><span>Firmware</span>
                 <span>Algorithms</span><span>Manufacturing</span><!--/@--></div>
 
-              <p data-t="chess.access"><!--@chess.access--><strong>Built to be played with.</strong> Difficulty is adjustable through
-                 search depth, so a beginner and a stronger player get a game rather than a
-                 formality. An LED matrix under the board lights the legal moves for a piece you
-                 pick up, and the moves the engine would consider best, which turns a game into
-                 a lesson. And every move is announced aloud, so someone who can't easily read a
+              <p data-t="chess.access"><!--@chess.access-->You can change the difficulty through search depth, so a beginner and a
+                 stronger player both get a real game. When you pick up a piece, an LED matrix
+                 under the board lights up its legal moves and the moves the engine rates best.
+                 Every move is also announced out loud, so someone who can't easily read the
                  board across the table can still follow the game.<!--/@--></p>
 
               <p data-t="chess.awards"><!--@chess.awards--><strong>Provincial finalist, Hydro-Québec Science Fair.</strong>
@@ -958,9 +956,9 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">Revisions</span></div>
             <div>
-              <h3>Three builds to get here</h3>
-              <p data-t="chess.revisions" class="lede"><!--@chess.revisions-->Across 18 months I prototyped three complete systems to reach a working
-                 board. Real geometry below, straight from the CAD.<!--/@--></p>
+              <h3>The three versions</h3>
+              <p data-t="chess.revisions" class="lede"><!--@chess.revisions-->Over 18 months I prototyped three complete systems before the board
+                 worked. The models below come straight from the CAD.<!--/@--></p>
               <div class="revs">
                 <div class="rev">
                   <button class="rev-open" data-title="MK1" data-tris="108886" data-srckb="5317"
@@ -968,10 +966,9 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                     <span class="mesh" data-model="edges/chess-mk1.bin" data-spin=".18"></span>
                     <span class="rev-cue">Click to orbit</span>
                   </button>
-                  <b>MK1</b><span>A purely conceptual design, built to work out base dimensions
-                    and find the main mechanical challenges. Working out the concepts and how to fit
-                    all that needs to be included on the inside of the board. Worked out a design
-                    language.</span>
+                  <b>MK1</b><span>A concept build to work out the base dimensions, find the main
+                    mechanical problems, figure out how to fit everything inside the board and
+                    settle on a design language.</span>
                 </div>
                 <div class="rev">
                   <button class="rev-open" data-title="MK2" data-tris="124752" data-srckb="6091"
@@ -979,10 +976,9 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                     <span class="mesh" data-model="edges/chess-mk2.bin" data-spin=".18"></span>
                     <span class="rev-cue">Click to orbit</span>
                   </button>
-                  <b>MK2</b><span>Refined, with geometry that fits all the electronics, and an
-                    improved CoreXY system. Added housing for electronics. Added extra support for
-                    the top surface and designed it to be manufactured and assembled. Added space for
-                    extra cooling.</span>
+                  <b>MK2</b><span>Fit all of the electronics and improved the CoreXY system. I
+                    added housing for the electronics, extra support for the top surface and space
+                    for more cooling, and designed it to be manufactured and assembled.</span>
                 </div>
                 <div class="rev">
                   <button class="rev-open" data-title="MK3" data-tris="391612" data-srckb="19122"
@@ -990,24 +986,24 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                     <span class="mesh" data-model="edges/chess-mk3.bin" data-spin=".18"></span>
                     <span class="rev-cue">Click to orbit</span>
                   </button>
-                  <b>MK3</b><span>Swapped from a reed switch base to Hall effect sensors to avoid
-                    floating switches, with a larger play area to allow better packaging, and
-                    nearer to a full-sized chess set. Hall effect sensors allowed for polarity
-                    readings instead of only basing itself on memory to track pieces. Integrated
-                    cooling, controls, LEDs, speakers and a liftable playing surface for
-                    maintenance.</span>
+                  <b>MK3</b><span>Replaced the reed switches with Hall effect sensors to stop
+                    false readings from floating switches. The play area got bigger, which helped
+                    with packaging and is closer to a full-size set. The Hall sensors read polarity,
+                    so the board knows the colour of each piece and doesn't have to track them from
+                    memory. I also added cooling, controls, LEDs, speakers and a playing surface that
+                    lifts for maintenance.</span>
                 </div>
               </div>
 
               <div data-t="chess.learned" style="margin-top:2rem"><b>What I had to work out</b><!--@chess.learned-->
-                System integration and electronics packaging. It was the first time I'd worked
-                under so many constraints at once. Motors, drivers, and the electromagnet itself
-                all threw electromagnetic interference across the sensor grid. Wiring,
-                calibrating, and reading 64 individual sensors was its own problem, and came to
-                over 40&nbsp;m of wire. Shielding was added to all motor and sensor signal wires.
-                Each sensor was calibrated with no interference, and with magnets. Electronics
-                packaging was managed by adding components to all surfaces, including below the
-                hinging playing surface.<!--/@--></div>
+                The hardest part was system integration and fitting all the electronics in. It
+                was the first time I'd worked under so many constraints at once. The motors,
+                drivers and electromagnet all put electromagnetic interference on the sensor
+                grid. Wiring, calibrating and reading 64 separate sensors took over 40&nbsp;m of
+                wire. I shielded every motor and sensor signal wire, and calibrated each sensor
+                twice, once with no interference and once with magnets present. To fit
+                everything, I mounted components on every surface, including under the hinged
+                playing surface.<!--/@--></div>
             </div>
           </div>
         </div>
@@ -1016,11 +1012,11 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">Movement</span></div>
             <div>
-              <h3>Neither motor is an axis</h3>
-              <p data-t="chess.movement" class="lede"><!--@chess.movement-->CoreXY is a compact but more complex way to get cartesian movement,
-                 commonly used in 3D printers. Both motors stay bolted to the frame, so none of
-                 their weight moves. The trade is that neither one drives X or Y on its own, since
-                 every move is a combination of the two. Drag the magnet, or drive one motor at a
+              <h3>How the CoreXY gantry moves</h3>
+              <p data-t="chess.movement" class="lede"><!--@chess.movement-->CoreXY is a compact but more complex way to get Cartesian movement,
+                 and it's common in 3D printers. Both motors stay bolted to the frame, so none of
+                 their weight moves. The downside is that neither motor drives X or Y on its own,
+                 since every move combines the two. Drag the magnet, or drive one motor at a
                  time.<!--/@--></p>
 
               <div class="d-centre">
@@ -1068,7 +1064,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
               </div>
               <p data-t="chess.corexy-note" class="note" style="margin-top:.9rem">
                 <svg viewBox="0 0 26 14" aria-hidden="true"><path d="M1 11 C 8 12, 16 8, 23 3 M23 3 L17 4 M23 3 L22 9"/></svg>
-                one motor alone gives a diagonal, which is the whole idea
+                driving one motor on its own moves the magnet diagonally
               </p>
               </div>
             </div>
@@ -1079,12 +1075,12 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">Sensor grid</span></div>
             <div>
-              <h3>64 sensors, 8 pins</h3>
-              <p data-t="chess.sensing" class="lede"><!--@chess.sensing-->Under each square is a Hall effect sensor, which detects not only
-                 that a piece is there but also its polarity. Each one has three pins. Power and
-                 ground sit on shared rails, so only the signal leg is unique, and the 64 signals
-                 fan into four 16-channel multiplexers before reaching the Arduino. Hover a square
-                 to follow its path.<!--/@--></p>
+              <h3>Reading 64 sensors with 8 pins</h3>
+              <p data-t="chess.sensing" class="lede"><!--@chess.sensing-->The Hall effect sensor under each square detects whether a piece is
+                 there and also its polarity. Each sensor has three pins. Power and ground are on
+                 shared rails, so only the signal leg is unique, and the 64 signals go through four
+                 16-channel multiplexers before reaching the Arduino. Hover over a square to follow
+                 its path.<!--/@--></p>
 
               <figure class="diagram">
                 <svg id="mux" viewBox="0 0 470 268" role="img"
@@ -1115,13 +1111,13 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">The engine</span></div>
             <div>
-              <h3>Play the firmware</h3>
-              <p data-t="chess.engine" class="lede"><!--@chess.engine-->The chess itself is a
+              <h3>Play against the engine</h3>
+              <p data-t="chess.engine" class="lede"><!--@chess.engine-->The chess part is a
                  <a href="https://home.hccnet.nl/h.g.muller/max-src2.html">minimax engine by
-                 H.G. Muller</a>, retrofitted for my own chess board's needs: difficulty through
-                 search depth, an LED grid for legal moves, and an LED grid for best moves.<!--/@--></p>
-              <p data-t="chess.engine-tree">The algorithm calculates moves in a tree to see which future branch awards it the
-                 most advantage, while minimising the opponent's.</p>
+                 H.G. Muller</a> that I modified for my board. I added difficulty through search
+                 depth, an LED grid for legal moves and an LED grid for best moves.<!--/@--></p>
+              <p data-t="chess.engine-tree">The engine searches a tree of possible future moves and picks the branch that
+                 scores best for its side and worst for the opponent.</p>
 
               <div class="chess-wrap">
                 <div class="chess-left">
@@ -1154,7 +1150,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
               </div>
               <div class="budget-ends">
                 <span>random moves</span>
-                <span>what the code can actually do</span>
+                <span>full search</span>
               </div>
             </div>
           </div>
@@ -1202,11 +1198,11 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">2025</span></div>
             <div>
               <h3><!--@crc.title-->CRC Competition Robot<!--/@--></h3>
-              <p data-t="crc.lede" class="lede"><!--@crc.lede-->Over the course of 8 months, I developed the robot for John
-                 Abbott's robotics team, competing in the Canadian Robotics Competition. I built a
-                 swerve drive drivetrain, and a dual claw mechanism to both stack and move game
-                 pieces, movable in all three axes independently from the drive base.<!--/@--></p>
-              <p data-t="crc.award"><!--@crc.award--><strong>These ideas placed us 2nd for Robot Design.</strong><!--/@--></p>
+              <p data-t="crc.lede" class="lede"><!--@crc.lede-->Over 8 months I developed John Abbott's robot for the Canadian
+                 Robotics Competition. I built a swerve drivetrain and a dual claw that stacks and
+                 moves game pieces and can move in all three axes independently of the drive
+                 base.<!--/@--></p>
+              <p data-t="crc.award"><!--@crc.award--><strong>The robot placed 2nd for Robot Design.</strong><!--/@--></p>
 
               <div class="robot">
                 <button class="rev-open" data-title="CRC 2026 robot" data-tris="2515712" data-srckb="122838"
@@ -1243,16 +1239,16 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
               <div class="sw-cad" data-gallery>
                 <button class="g-item" data-full="media/crc/swerve-drive-complete.jpg"><span class="g-thumb"><img src="media/crc/swerve-drive-complete.jpg" alt="CAD of a complete swerve module mounted in the drive base: steering pulley on top, drive motor and gearbox below" loading="lazy"></span><span class="g-cap">Swerve module, CAD</span></button>
               </div>
-              <p class="lede"><strong>Drivetrain – Swerve Drive</strong></p>
-              <p data-t="crc.swerve-what">A swerve drive is a powered wheel that can steer in all 360 degrees. Syncing the
-                 steering and drive of all four wheels lets the robot drive in any direction
-                 without changing its orientation.</p>
-              <p data-t="crc.swap"><strong>Designed to be swapped, not repaired.</strong> Each module is
-                 self-contained and held in by just four bolts. Take them out and the whole module
-                 drops out from below, and a fresh one goes in the same way.</p>
+              <p class="lede"><strong>Swerve drive</strong></p>
+              <p data-t="crc.swerve-what">In a swerve drive, every wheel is powered and can also steer a full 360 degrees.
+                 With the steering and drive of all four wheels synced, the robot can drive in any
+                 direction without turning to face it.</p>
+              <p data-t="crc.swap">Each module is self-contained and held in by four bolts. With the
+                 bolts out, the whole module drops out from below, and a new one goes in the same
+                 way.</p>
               <ul class="specs sw-specs">
                 <li><b>30 s</b><span>to exchange a module</span></li>
-                <li><b>4</b><span>bolts, the only tools needed</span></li>
+                <li><b>4</b><span>bolts hold each module in</span></li>
               </ul>
               <figure class="swerve">
                 <div class="sw-stage" id="swStage">
@@ -1288,14 +1284,13 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <div class="pcols">
             <div><span class="year">Claw</span></div>
             <div>
-              <h3>Two chopsticks, one game piece</h3>
-              <p data-t="crc.claw" class="lede">The claw doesn't grip. Two arms on fixed pivots act like chopsticks: each
-                 one stays tangent to the game piece, one on either side, so swinging them pushes
-                 the piece side to side while it's held from both directions the whole way.
-                 The game scores a multiplier for stacked pieces, so placement has to be exact.
-                 The chopstick motion adds extra movement in the Y direction on its own, lining a
-                 piece up over the stack while the base stays still.
-                 Drag the piece, or grab either arm.</p>
+              <h3>How the claw moves pieces</h3>
+              <p data-t="crc.claw" class="lede">The claw holds pieces without gripping them. Two arms on fixed pivots work
+                 like chopsticks, one on each side, and each stays tangent to the game piece. So
+                 swinging them pushes the piece side to side while it's held from both sides the
+                 whole time. Stacked pieces score a multiplier, so placement has to be exact. This
+                 motion adds some movement in the Y direction, which lines a piece up over the stack
+                 while the base stays still. Drag the piece, or grab either arm.</p>
 
               <div class="d-centre">
                 <figure class="diagram">
@@ -1391,15 +1386,15 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year"><!--@rl.year-->2026<!--/@--></span></div>
             <div>
               <h3><!--@rl.title-->Wheel-Leg Biped Balance Controller<!--/@--></h3>
-              <p data-t="rl.lede" class="lede"><!--@rl.lede-->This is the balance and driving controller for my wheel-leg biped.
-                 Instead of tuning a controller by hand, I trained a neural network in the MuJoCo
-                 simulator using reinforcement learning (PPO). Training took about 25 million
-                 control steps, which works out to 69 hours of simulated driving.<!--/@--></p>
+              <p data-t="rl.lede" class="lede"><!--@rl.lede-->This is the balance and driving controller for my wheel-leg biped. It's a
+                 neural network I trained with reinforcement learning (PPO) in the MuJoCo
+                 simulator. Training took about 25 million control steps, which works out to 69
+                 hours of simulated driving.<!--/@--></p>
               <p data-t="rl.demo"><!--@rl.demo-->The player below replays the trained policy in simulation. The network
                  next to it is the actual trained network. Its 22,406 weights run in your browser
-                 on the same sensor readings the simulated robot received, so the neurons lighting
-                 up are the ones deciding each motor command. The clips marked Demo mode use a
-                 second policy trained with the hardware limits removed, described at the end of
+                 on the same sensor readings the simulated robot got, so the neurons that light up
+                 are the ones producing each motor command. The clips marked Demo mode use a second
+                 policy trained with the hardware limits removed, which I describe at the end of
                  this section.<!--/@--></p>
 
               <div class="rl-demo" id="rlDemo">
@@ -1445,7 +1440,7 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
 
               <ul class="specs"><!--@rl.specs-->
                 <li><b>22,406</b><span>weights in the network</span></li>
-                <li><b>25 M</b><span>control steps of practice</span></li>
+                <li><b>25 M</b><span>control steps of training</span></li>
                 <li><b>10.8 h</b><span>of training on a laptop CPU</span></li>
                 <li><b>100 Hz</b><span>control rate</span></li>
                 <li><b>39 in, 6 out</b><span>network inputs and outputs</span></li>
@@ -1464,8 +1459,8 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div>
               <h3>Inputs and outputs</h3>
               <p data-t="rl.network" class="lede"><!--@rl.network-->Every 10 ms the network takes 39 values and returns 6. It has no
-                 memory between steps and no physics model. It is two hidden layers of 128
-                 neurons with tanh activations, mapping the current state directly to motor
+                 memory between steps and no physics model. It's two hidden layers of 128 neurons
+                 with tanh activations, and it maps the current state straight to motor
                  commands.<!--/@--></p>
 
               <div class="rl-io">
@@ -1490,21 +1485,21 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                     <li><i class="out"></i>Hip position targets, front and rear, each side<em>4</em></li>
                     <li><i class="out"></i>Wheel torques<em>2</em></li>
                   </ul>
-                  <p data-t="rl.hips-note" class="rl-note">The hips are position controlled. A PD loop running at 1&nbsp;kHz
-                     converts each target into a torque, through a 12:1 3D printed planetary
-                     gearbox. The wheels are commanded in torque directly. The wheels do the
-                     balancing, and the legs set the ride height and absorb uneven ground.</p>
+                  <p data-t="rl.hips-note" class="rl-note">The hips are position controlled. A PD loop at 1&nbsp;kHz turns each
+                     target into a torque, through a 12:1 3D-printed planetary gearbox. The wheels
+                     are commanded in torque directly. The wheels do the balancing, and the legs set
+                     the ride height and take up uneven ground.</p>
                 </div>
               </div>
 
-              <p data-t="rl.norm"><!--@rl.norm-->The inputs are normalized using statistics collected during training, and
-                 the network only works with those exact statistics. If the weights are exported
+              <p data-t="rl.norm"><!--@rl.norm-->The inputs are normalized with statistics collected during training, and
+                 the network only works with those exact statistics. If the weights get exported
                  without them, the export still passes its own check but the robot behaves
-                 incorrectly. This happened once, so the export script now refuses to run
-                 without the matching statistics file.<!--/@--></p>
-              <p data-t="rl.export"><!--@rl.export-->The weights are also exported to a C header for the microcontroller. I
-                 checked the C version of the forward pass against the Python network, and the
-                 outputs match to within 4&times;10<sup>&minus;7</sup>.<!--/@--></p>
+                 wrongly. That happened once, so the export script now won't run without the
+                 matching statistics file.<!--/@--></p>
+              <p data-t="rl.export"><!--@rl.export-->The weights also export to a C header for the microcontroller. I checked
+                 the C forward pass against the Python network, and the outputs match to within
+                 4&times;10<sup>&minus;7</sup>.<!--/@--></p>
             </div>
           </div>
         </div>
@@ -1515,10 +1510,10 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div>
               <h3>Training with PPO</h3>
               <p data-t="rl.ppo" class="lede"><!--@rl.ppo-->PPO trains the network from experience. Six copies of the simulator
-                 run in parallel, the policy drives each one, and every control step receives a
-                 reward. After each batch, the network is updated toward the actions that did
-                 better than expected. PPO limits how far a single update can change the policy,
-                 which keeps training stable.<!--/@--></p>
+                 run in parallel with the policy driving each one, and every control step gets a
+                 reward score. After each batch, the network is updated toward the actions that
+                 scored better than expected. PPO limits how much a single update can change the
+                 policy, which keeps training stable.<!--/@--></p>
 
               <div class="rl-io">
                 <div>
@@ -1544,19 +1539,19 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
               </div>
 
               <p data-t="rl.curriculum"><!--@rl.curriculum-->Training uses a curriculum. It starts on flat ground with an ideal
-                 robot that is mostly asked to stand still. Over the first 40% of training, the
-                 terrain gets rougher, the pushes get stronger, and the robot's physical
-                 parameters are randomized over wider ranges.<!--/@--></p>
+                 robot that's mostly asked to stand still. Over the first 40% of training, the
+                 terrain gets rougher, the pushes get harder, and the robot's physical parameters
+                 are randomized over wider ranges.<!--/@--></p>
 
               <div data-t="rl.learned"><b>What I had to work out</b><!--@rl.learned-->
-                The most useful habit was checking why episodes ended, not only how long they
-                lasted. Partway through one run, episode length dropped from 1860 to 1160 steps.
-                It looked like the normal dip when the curriculum gets harder, but it was a bug.
-                The crouch command limit had been calculated from nominal motor values, and once
-                the randomization widened, 92.5% of the simulated robots could not physically hold
-                the commanded pose. A second bug computed the velocity reward in the world frame
-                instead of the robot's frame, so it measured the wrong axis whenever the robot
-                turned. Forward speed tracking was stuck at 52% of the command until I fixed
+                Partway through one run, episode length dropped from 1860 to 1160 steps. It
+                looked like the normal dip when the curriculum gets harder, but it was a bug. The
+                crouch command limit had been calculated from nominal motor values, and once the
+                randomization widened, 92.5% of the simulated robots physically couldn't hold the
+                commanded pose. I only found it by checking why episodes ended, not just how long
+                they lasted. A second bug computed the velocity reward in the world frame instead
+                of the robot's frame, so it measured the wrong axis whenever the robot turned.
+                Forward speed tracking was stuck at 52% of the command until I fixed
                 it.<!--/@--></div>
             </div>
           </div>
@@ -1567,9 +1562,9 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div><span class="year">Sim to real</span></div>
             <div>
               <h3>Randomization for real hardware</h3>
-              <p data-t="rl.sim2real" class="lede"><!--@rl.sim2real-->A policy trained on one perfect simulated robot will not work on the
-                 real one, so the simulation is made harder than reality on purpose. The motor
-                 model uses the measured electrical constants, with a back-EMF torque limit and a
+              <p data-t="rl.sim2real" class="lede"><!--@rl.sim2real-->A policy trained on one perfect simulated robot won't work on the real
+                 one, so I made the simulation harder than reality on purpose. The motor model
+                 uses the measured electrical constants, with a back-EMF torque limit and a
                  1&nbsp;A current limit, and the windings heat up with use. Each episode also uses a
                  different randomized robot.<!--/@--></p>
 
@@ -1597,13 +1592,13 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
               </ul>
 
               <div data-t="rl.status" id="rl-status"><b>Current status</b><!--@rl.status-->
-                The controller is not finished. Under nominal conditions it balances, drives,
+                The controller isn't finished yet. Under nominal conditions it balances, drives,
                 turns in place and recovers from pushes. Turn rate tracks within a few percent,
                 but forward speed only reaches about two thirds of a fast command, which you can
-                see on the speed gauge in the player. It also does not follow ride height
-                commands yet. With full randomization it still fails about half of its 20 second
-                episodes, and it cannot reliably drive off an 18&nbsp;mm step. The next steps are
-                validation in simulation, then testing on the real robot.<!--/@--></div>
+                see on the speed gauge in the player. It doesn't follow ride height commands yet.
+                With full randomization it still fails about half of its 20 second episodes, and
+                it can't reliably drive off an 18&nbsp;mm step. Next I'm doing more validation in
+                simulation, then testing on the real robot.<!--/@--></div>
             </div>
           </div>
         </div>
@@ -1614,10 +1609,10 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
             <div>
               <h3>Demo version without hardware limits</h3>
               <p data-t="rl.demo-lede" class="lede"><!--@rl.demo-lede-->The policy above is limited by what my hardware can do. For this
-                 version I continued training the same policy in a simulation with the physical
-                 limits removed, to see how far the method could go when motor power was not the
-                 constraint. It appears as the Demo mode clips in the player. It is only a
-                 simulation result and will not be used on the real robot.<!--/@--></p>
+                 version I kept training the same policy in a simulation with the physical limits
+                 removed, to see how far the method could go when motor power wasn't the
+                 constraint. These are the Demo mode clips in the player. It's only a simulation
+                 result and won't be used on the real robot.<!--/@--></p>
 
               <div class="rl-io">
                 <div>
@@ -1646,12 +1641,12 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
                  over 24&nbsp;mm steps. The hardware-limited policy fell on 18&nbsp;mm steps in all
                  8 test runs. Episode survival went from about 50% to 81%.<!--/@--></p>
 
-              <div data-t="rl.demo-limits"><b>What did not improve</b><!--@rl.demo-limits-->
-                More power did not fix everything. Forward speed still undershoots, reaching
-                1.24 m/s when asked for 1.8, and it still ignores ride height commands. The
-                hardware-limited policy has both of these problems too, so they are not caused by
-                a lack of torque. A push that lands while it is driving and turning at the same
-                time still knocks it over in five of six runs.<!--/@--></div>
+              <div data-t="rl.demo-limits"><b>What didn't improve</b><!--@rl.demo-limits-->
+                Forward speed still undershoots, reaching 1.24 m/s when asked for 1.8, and it
+                still doesn't follow ride height commands. The hardware-limited policy has both of
+                these problems too, so they aren't caused by a lack of torque. A push that lands
+                while it's driving and turning at the same time still knocks it over in five of
+                six runs.<!--/@--></div>
             </div>
           </div>
         </div>
@@ -1699,11 +1694,10 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
         <div class="foot-links">
           <a href="/resume.pdf">Résumé</a>
           <a href="/portfolio.pdf">Portfolio PDF</a>
-          <a href="https://github.com/simonnnz">GitHub</a>
         </div>
       </div>
-      <p data-t="foot.colophon" class="colophon">Hand-written HTML, CSS, and WebGL. No framework, no build step.<br>
-         Wireframes are feature edges extracted from the original CAD.</p>
+      <p data-t="foot.colophon" class="colophon">The wireframes are edges taken straight from my
+         original CAD files.</p>
     </div>
   </div>
 </footer>
