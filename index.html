@@ -187,6 +187,8 @@ mark { background: var(--tape); color: inherit; padding:.05em .2em; }
   /* the leg stands upright: motors on top, wheel below, so a tall box */
   .c4 .mesh { width:clamp(9rem,13vw,15rem); height:clamp(10rem,15vw,18rem); }
   .c5 { right:6%; top:80%; transform:rotate(-1.5deg); }
+  .c6 { right:15%; top:13%; transform:rotate(-1deg); }
+  .c5 .mesh, .c6 .mesh { width:clamp(11rem,16vw,19rem); height:clamp(9rem,13vw,16rem); }
   /* the two finished projects get the room: chess on the left, the robot on the right */
   .c1 .mesh, .c2 .mesh { width:clamp(17rem,28vw,34rem); height:clamp(12rem,18vw,21rem); }
 }
@@ -727,6 +729,8 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           font-size:.7rem; line-height:1; padding:.45rem .55rem .4rem .6rem; border-radius:2px;
           background:var(--accent); color:var(--paper); }
 .g-cap { display:block; font-size:.82rem; color:var(--ink-2); margin-top:.4rem; }
+/* plots and charts: show the whole image in the thumbnail, don't crop it */
+.g-fit img { object-fit:contain; background:#fcfcfa; }
 
 /* preview on each project's first page: a looping clip plus a few thumbs,
    the whole block is one link into that project's gallery */
@@ -857,12 +861,18 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
       <span class="bar"></span>
       <span class="flag-wip">In progress</span>
     </a>
-    <a class="chip c5" href="#construction">
-      <span class="mesh" data-empty></span>
+    <a class="chip c5" href="#probe">
+      <span class="mesh" data-model="edges/probe.bin" data-spin=".5" data-alpha=".95"></span>
       <span class="n">05</span>
       <span class="label">Flying Probe Tester <span class="arrow">↗</span></span>
       <span class="bar"></span>
       <span class="flag-wip">In progress</span>
+    </a>
+    <a class="chip c6" href="#scanner">
+      <span class="mesh" data-model="edges/scanner.bin" data-spin="-.6" data-alpha=".95"></span>
+      <span class="n">06</span>
+      <span class="label">Scanning Robot <span class="arrow">↗</span></span>
+      <span class="bar"></span>
     </a>
   </div>
 
@@ -882,7 +892,9 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
           <li><a href="#crc">CRC competition robot</a></li>
           <li><a href="#rl">Reinforcement learning</a></li>
           <li><a href="#construction">Wheeled biped <span>in progress</span></a></li>
-          <li><a href="#construction">Flying probe tester <span>in progress</span></a></li>
+          <li><a href="#probe">Flying probe tester <span>in progress</span></a></li>
+          <li><a href="#scanner">Scanning robot</a></li>
+          <li><a href="#planes">Model airplanes</a></li>
         </ol>
       </details>
       <button class="lang" id="langBtn" type="button" lang="fr" aria-pressed="false">Français</button>
@@ -1660,6 +1672,86 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
       </div>
     </article>
 
+    <!-- The three projects below are media only for now: no write-up yet.
+         To add text, put <p> paragraphs under the <h3>, like the projects above. -->
+
+    <!-- ---------- FLYING PROBE TESTER ---------- -->
+    <article class="project rise" id="probe" data-project>
+      <div class="strip" data-strip>
+        <div class="frame">
+          <div class="pcols">
+            <div><span class="year">In progress</span></div>
+            <div>
+              <h3>Flying Probe Tester</h3>
+              <div class="robot">
+                <button class="rev-open" data-title="Flying probe tester" data-srckb="9816"
+                        data-open-model="edges/probe-hi.bin">
+                  <span class="mesh" data-model="edges/probe.bin" data-spin=".5"></span>
+                  <span class="rev-cue">Click to orbit</span>
+                </button>
+              </div>
+              <div class="gallery" data-gallery>
+                <button class="g-item g-video" data-video="media/probe/1-video-gantry-moving.mp4"><span class="g-thumb"><img src="media/probe/1-video-gantry-moving-poster.jpg" alt="Flying probe tester gantry moving on the bench" loading="lazy"></span><span class="g-cap">Gantry moving</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- SCANNING ROBOT ---------- -->
+    <article class="project rise" id="scanner" data-project>
+      <div class="strip" data-strip>
+        <div class="frame">
+          <div class="pcols">
+            <div><span class="year">2026</span></div>
+            <div>
+              <h3>Scanning Robot</h3>
+              <div class="robot">
+                <button class="rev-open" data-title="Scanning robot" data-srckb="8811"
+                        data-open-model="edges/scanner-hi.bin">
+                  <span class="mesh" data-model="edges/scanner.bin" data-spin="-.6"></span>
+                  <span class="rev-cue">Click to orbit</span>
+                </button>
+              </div>
+              <div class="gallery" data-gallery>
+                <button class="g-item g-video" data-video="media/scanner/img-3440.mp4"><span class="g-thumb"><img src="media/scanner/img-3440-poster.jpg" alt="The robot driving through a tunnel of white walls" loading="lazy"></span><span class="g-cap">Driving through the tunnel</span></button>
+                <button class="g-item" data-full="media/scanner/img-3439.jpg"><span class="g-thumb"><img src="media/scanner/img-3439-thumb.jpg" alt="The robot inside the test tunnel, seen from above" loading="lazy"></span><span class="g-cap">In the test tunnel</span></button>
+                <button class="g-item" data-full="media/scanner/img-3378.jpg"><span class="g-thumb"><img src="media/scanner/img-3378-thumb.jpg" alt="The robot held in one hand, showing the geared sensor mount" loading="lazy"></span><span class="g-cap">Sensor sweep gears</span></button>
+                <button class="g-item" data-full="media/scanner/img-3418.jpg"><span class="g-thumb"><img src="media/scanner/img-3418-thumb.jpg" alt="The distance sensor on its mount, wearing a printed hard hat" loading="lazy"></span><span class="g-cap">Distance sensor</span></button>
+              </div>
+              <div class="gallery" data-gallery style="margin-top:.9rem">
+                <button class="g-item g-fit" data-full="media/scanner/1-tunnel-map-2d-scan.jpg"><span class="g-thumb"><img src="media/scanner/1-tunnel-map-2d-scan-thumb.jpg" alt="Plot of the tunnel walls as mapped by the robot, with the path it drove" loading="lazy"></span><span class="g-cap">Tunnel map, 2D scan</span></button>
+                <button class="g-item g-fit" data-full="media/scanner/2-tunnel-in-3d.jpg"><span class="g-thumb"><img src="media/scanner/2-tunnel-in-3d-thumb.jpg" alt="3D point cloud of the same tunnel, coloured by height" loading="lazy"></span><span class="g-cap">Tunnel in 3D</span></button>
+                <button class="g-item g-fit" data-full="media/scanner/3-sensor-delay-before-and-after.jpg"><span class="g-thumb"><img src="media/scanner/3-sensor-delay-before-and-after-thumb.jpg" alt="The same readings before and after correcting for the sensor delay" loading="lazy"></span><span class="g-cap">Sensor delay, before and after</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
+    <!-- ---------- MODEL AIRPLANES ---------- -->
+    <article class="project rise" id="planes" data-project>
+      <div class="strip" data-strip>
+        <div class="frame">
+          <div class="pcols">
+            <div><span class="year">2021</span></div>
+            <div>
+              <h3>Model Airplanes</h3>
+              <div class="gallery" data-gallery>
+                <button class="g-item" data-full="media/planes/plane-2.jpg"><span class="g-thumb"><img src="media/planes/plane-2-thumb.jpg" alt="Foam wing and tail on a wooden frame during the build" loading="lazy"></span><span class="g-cap">Build</span></button>
+                <button class="g-item" data-full="media/planes/plane-5.jpg"><span class="g-thumb"><img src="media/planes/plane-5-thumb.jpg" alt="The airplane laid out on the floor with its electronics" loading="lazy"></span><span class="g-cap">Build, second view</span></button>
+                <button class="g-item" data-full="media/planes/plane-7.jpg"><span class="g-thumb"><img src="media/planes/plane-7-thumb.jpg" alt="Carrying the airplane out to a field" loading="lazy"></span><span class="g-cap">Heading out to fly</span></button>
+                <button class="g-item" data-full="media/planes/plane-3.jpg"><span class="g-thumb"><img src="media/planes/plane-3-thumb.jpg" alt="The airplane on the grass with the radio controller" loading="lazy"></span><span class="g-cap">At the field</span></button>
+                <button class="g-item" data-full="media/planes/plane-1.jpg"><span class="g-thumb"><img src="media/planes/plane-1-thumb.jpg" alt="The airplane in the air over the field" loading="lazy"></span><span class="g-cap">In the air</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </article>
+
   </div>
 </section>
 
@@ -1678,7 +1770,6 @@ footer { padding:4rem 0 5rem; border-top:1px solid var(--line); }
            half a page.</p>
         <ul class="uc-list">
           <li>Wheeled biped, hardware</li>
-          <li>Flying probe tester</li>
         </ul>
       </div>
       <div class="tape" aria-hidden="true"></div>
@@ -3698,9 +3789,11 @@ document.querySelectorAll("[data-model]").forEach(function (el) {
       var tris = parseInt(btn.dataset.tris || "0", 10);
       var kb = parseInt(btn.dataset.srckb || "0", 10);
       var outKb = Math.round(segments * 24 / 1024);
+      /* models read from a STEP file have exact edges and no triangle count */
       stats.textContent =
-        segments.toLocaleString() + " edges · from " + tris.toLocaleString() +
-        " triangles · " + outKb.toLocaleString() + " KB of " + kb.toLocaleString() + " KB (" +
+        segments.toLocaleString() + " edges · " +
+        (tris ? "from " + tris.toLocaleString() + " triangles · " : "") +
+        outKb.toLocaleString() + " KB of " + kb.toLocaleString() + " KB (" +
         (100 * outKb / kb).toFixed(1) + "%)";
     }
     view.onload = function (v) {
