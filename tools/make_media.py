@@ -62,6 +62,9 @@ NUMBERED = {"planes": "plane"}
 SKIP = {
     "9F5D22C1-7051-46EB-9A85-90903AC2CA44 (1).jpeg",
     "EDB26F0D-9858-4B10-A6A7-E938D3A849F3 (1).jpeg",
+    # The yellow airplane was not built by Simon (would have been plane-3, plane-7).
+    "477CF119-5F16-4FFD-973E-396265C65067 (1).jpeg",
+    "F532A86A-4079-45DA-8082-474C08109AC8 (1).jpeg",
 }
 
 # Short silent loops that autoplay in each project's gallery preview.
