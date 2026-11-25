@@ -175,7 +175,7 @@ def sample(edge, ang_defl, curv_defl):
 
 def extract(path, out_path, solid_index=None, ref=None,
             ang_deg=12.0, curv_frac=0.0012, min_len=0.0,
-            part=None, exclude=None):
+            part=None, exclude=None, zup=False):
     shape = read_step(path)
 
     target = shape
@@ -236,9 +236,12 @@ def extract(path, out_path, solid_index=None, ref=None,
                 continue
         for i in range(len(pts) - 1):
             for p in (pts[i], pts[i + 1]):
-                out.append((p[0] - centre[0]) / extent)
-                out.append((p[1] - centre[1]) / extent)
-                out.append((p[2] - centre[2]) / extent)
+                x = (p[0] - centre[0]) / extent
+                y = (p[1] - centre[1]) / extent
+                z = (p[2] - centre[2]) / extent
+                if zup:                 # CAD with Z up -> the viewer's Y up
+                    x, y, z = x, z, -y
+                out.extend((x, y, z))
             segments += 1
 
     with open(out_path, "wb") as fh:
@@ -304,4 +307,5 @@ if __name__ == "__main__":
         min_len=arg("--minlen", 0.0),
         part=arg("--part", None, str),
         exclude=arg("--except", None, str),
+        zup="--zup" in sys.argv,
     )

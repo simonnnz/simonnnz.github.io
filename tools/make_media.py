@@ -49,6 +49,22 @@ PICK = {
         "MK2 Moving Piece.MOV",
     ]),
     "crc": ("CRC", None),   # None = everything in the folder
+    "scanner": ("Scanning Robot", None),
+    "probe": ("Flying probe tester", None),
+    "planes": ("2021 - Model Airplanes", None),
+}
+
+# Folders whose files have camera names: the web copies are numbered instead.
+NUMBERED = {"planes": "plane"}
+
+# Never put on the site: these two show the front of a house and its number.
+# (They would have been plane-4 and plane-6; the numbering keeps the gap.)
+SKIP = {
+    "9F5D22C1-7051-46EB-9A85-90903AC2CA44 (1).jpeg",
+    "EDB26F0D-9858-4B10-A6A7-E938D3A849F3 (1).jpeg",
+    # The yellow airplane was not built by Simon (would have been plane-3, plane-7).
+    "477CF119-5F16-4FFD-973E-396265C65067 (1).jpeg",
+    "F532A86A-4079-45DA-8082-474C08109AC8 (1).jpeg",
 }
 
 # Short silent loops that autoplay in each project's gallery preview.
@@ -77,6 +93,7 @@ def photo(src, dst):
 def video(src, dst):
     subprocess.run([
         FFMPEG, "-y", "-loglevel", "error", "-i", src,
+        "-map_metadata", "-1",      # phone videos carry GPS; never copy it over
         "-vf", "scale='if(gt(iw,ih),min(1920,iw),-2)':'if(gt(iw,ih),-2,min(1920,ih))'",
         "-c:v", "libx264", "-preset", "slow", "-crf", "27", "-pix_fmt", "yuv420p",
         "-c:a", "aac", "-b:a", "96k", "-movflags", "+faststart",
@@ -96,9 +113,15 @@ def main():
             files = [os.path.join(root, n) for n in names]
         os.makedirs(os.path.join(OUT, group), exist_ok=True)
 
-        for src in files:
+        files = [f for f in files
+                 if os.path.splitext(f)[1].lower() in PHOTO | VIDEO]   # skips CAD files
+
+        for n, src in enumerate(files, 1):
+            if os.path.basename(src) in SKIP:
+                continue
             ext = os.path.splitext(src)[1].lower()
-            dst = os.path.join(OUT, group, slug(os.path.basename(src)))
+            name ="%s-%d" % (NUMBERED[group], n) if group in NUMBERED else slug(os.path.basename(src))
+            dst = os.path.join(OUT, group, name)
             done = dst + (".jpg" if ext in PHOTO else ".mp4")
             if not os.path.isfile(src):
                 print("  MISSING  %s" % src)
